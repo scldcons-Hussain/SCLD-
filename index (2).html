@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SCLD Agency — The Sales System for GCC Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-raised: #111111;
+    --white: #ffffff;
+    --off-white: #e8e8e8;
+    --muted: #6b6b6b;
+    --border: #1e1e1e;
+    --border-light: #282828;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--bg);
+    background: var(--white);
+    text-decoration: none;
+    padding: 10px 24px;
+    border: 1px solid var(--white);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: transparent;
+    color: var(--white);
+  }
+
+  /* ── SECTIONS ── */
+  section { width: 100%; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    padding: 180px 0 140px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  .hero-headline {
+    font-size: clamp(44px, 6vw, 80px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    max-width: 820px;
+    margin-bottom: 32px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--off-white);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.65;
+    margin-bottom: 56px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--bg);
+    background: var(--white);
+    text-decoration: none;
+    padding: 16px 40px;
+    border: 1px solid var(--white);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--white);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--white); }
+
+  .hero-rule {
+    margin-top: 100px;
+    display: flex;
+    gap: 64px;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── PROBLEM ── */
+  #problem {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 56px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--border-light);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .problem-left {
+    padding-right: 80px;
+    border-right: 1px solid var(--border);
+  }
+
+  .problem-right {
+    padding-left: 80px;
+  }
+
+  .problem-headline {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .problem-headline strong {
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .problem-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .problem-callout {
+    margin-top: 48px;
+    padding: 28px 32px;
+    border: 1px solid var(--border-light);
+    background: var(--bg-raised);
+  }
+
+  .problem-callout p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--off-white);
+  }
+
+  .problem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .problem-list li {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .problem-list li:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .li-mark {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-top: 3px;
+    min-width: 20px;
+  }
+
+  .li-text {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--off-white);
+    line-height: 1.6;
+  }
+
+  /* ── WHAT WE DO ── */
+  #solution {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+
+  .solution-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+
+  .solution-headline {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+
+  .solution-intro {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .solution-intro strong {
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  /* ── PACKAGES ── */
+  .packages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .package {
+    background: var(--bg);
+    padding: 56px;
+  }
+
+  .package-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .package-name {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .package-price {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
+  }
+
+  .package-price span {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .package-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .package-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .package-features li {
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--off-white);
+    line-height: 1.5;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .feature-dash {
+    color: var(--muted);
+    min-width: 10px;
+    margin-top: 1px;
+  }
+
+  /* ── PROCESS ── */
+  #process {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .process-header {
+    margin-bottom: 80px;
+    max-width: 640px;
+  }
+
+  .process-headline {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .process-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 40px;
+    padding: 48px 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .step:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step-num {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+
+  .step-content {}
+
+  .step-title {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .step-body {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 620px;
+  }
+
+  /* ── QUALIFIER ── */
+  #qualifier {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-raised);
+  }
+
+  .qualifier-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .qualifier-headline {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .qualifier-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .qualifier-checks {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .check-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .check-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .check-icon {
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .check-icon svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .check-text {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--off-white);
+    line-height: 1.55;
+  }
+
+  /* ── CTA ── */
+  #cta {
+    padding: 160px 0;
+  }
+
+  .cta-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .cta-headline {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--white);
+  }
+
+  .cta-headline em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .cta-right {}
+
+  .cta-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 48px;
+  }
+
+  .cta-action {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .btn-large {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--bg);
+    background: var(--white);
+    text-decoration: none;
+    padding: 20px 48px;
+    border: 1px solid var(--white);
+    transition: background 0.2s, color 0.2s;
+    text-align: center;
+  }
+
+  .btn-large:hover {
+    background: transparent;
+    color: var(--white);
+  }
+
+  .cta-note {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-note {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── DIVIDER LINE ── */
+  .h-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 28px; }
+    .container { padding: 0 28px; }
+    #hero { padding: 140px 0 100px; }
+    .hero-rule { gap: 40px; flex-wrap: wrap; }
+    .problem-grid,
+    .solution-header,
+    .qualifier-inner,
+    .cta-inner { grid-template-columns: 1fr; gap: 48px; }
+    .problem-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 48px; }
+    .problem-right { padding-left: 0; }
+    .packages { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 56px 1fr; gap: 24px; }
+    .cta-inner { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 500px) {
+    nav { padding: 18px 20px; }
+    .container { padding: 0 20px; }
+    .nav-logo { font-size: 11px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .package { padding: 36px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SCLD Agency</a>
+  <a href="#cta" class="nav-cta">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <span class="eyebrow">GCC Real Estate Growth System</span>
+    <h1 class="hero-headline">
+      Your agents should be closing,<br><em>not chasing.</em>
+    </h1>
+    <p class="hero-sub">
+      We install a complete done-for-you client acquisition system into your agency — automated lead generation, outbound outreach, prospect nurturing, and qualification. All handled.
+    </p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">Book a 20-Minute Call</a>
+      <a href="#solution" class="btn-ghost">See what's included →</a>
+    </div>
+    <div class="hero-rule">
+      <div class="hero-stat">
+        <span class="stat-number">3,000+</span>
+        <span class="stat-label">Daily targeted interactions</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-number">Week 1</span>
+        <span class="stat-label">System goes live</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-number">$3,000</span>
+        <span class="stat-label">Full setup + first month</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <div class="problem-grid">
+      <div class="problem-left">
+        <h2 class="problem-headline">
+          Inconsistent months aren't an agent problem.<br><strong>They're a lead system problem.</strong>
+        </h2>
+        <p class="problem-body">
+          Your agents are posting listings, making calls, and showing up. The effort is there. But without a structured system converting attention into booked appointments, the pipeline stays unpredictable.
+        </p>
+        <p class="problem-body">
+          Some months close. Most don't — and the gap is widening while you wait for referrals that may or may not come.
+        </p>
+        <div class="problem-callout">
+          <p>Deals are slipping through the cracks daily. And it's costing you more than you realize.</p>
+        </div>
+      </div>
+      <div class="problem-right">
+        <ul class="problem-list">
+          <li>
+            <span class="li-mark">01</span>
+            <span class="li-text">No automated way to generate consistent inbound interest from qualified buyers and sellers</span>
+          </li>
+          <li>
+            <span class="li-mark">02</span>
+            <span class="li-text">No follow-up system keeping warm prospects engaged between first contact and close</span>
+          </li>
+          <li>
+            <span class="li-mark">03</span>
+            <span class="li-text">No qualifying process to filter serious buyers from time-wasters before they reach your agents</span>
+          </li>
+          <li>
+            <span class="li-mark">04</span>
+            <span class="li-text">Agents spending hours on cold outreach instead of what they do best — closing deals</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="container">
+    <div class="section-label">What We Install</div>
+    <div class="solution-header">
+      <h2 class="solution-headline">A complete acquisition machine, built into your agency from scratch.</h2>
+      <p class="solution-intro">
+        We take over your lead generation entirely — not a template, not a course. <strong>A done-for-you system deployed into your specific agency, targeting your specific market.</strong> You stay 100% in fulfillment. You just sell.
+      </p>
+    </div>
+
+    <div class="packages">
+      <!-- Package 01 -->
+      <div class="package">
+        <div class="package-num">01 — Setup</div>
+        <div class="package-name">The SCLD System</div>
+        <div class="package-price"><span>$2,000</span> — One Time</div>
+        <p class="package-desc">
+          A complete done-for-you lead acquisition infrastructure built and installed into your agency from scratch.
+        </p>
+        <ul class="package-features">
+          <li>
+            <span class="feature-dash">—</span>
+            <span><strong>Automated Lead Generation</strong> — Full deployment of our proprietary software executing 3,000+ highly targeted daily interactions, pulling qualified buyer and seller leads directly to your agency on autopilot.</span>
+          </li>
+          <li>
+            <span class="feature-dash">—</span>
+            <span><strong>DM Outbound System</strong> — A fully operational outbound machine that captures, engages, and nurtures every new lead and follower. No prospect falls through the cracks.</span>
+          </li>
+          <li>
+            <span class="feature-dash">—</span>
+            <span><strong>Nurture & Social-Proof System</strong> — A structured follow-up sequence that keeps warm leads engaged and builds the social proof that converts hesitant prospects into booked appointments.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Package 02 -->
+      <div class="package">
+        <div class="package-num">02 — Ongoing</div>
+        <div class="package-name">Monthly Retainer</div>
+        <div class="package-price"><span>$1,000</span> — Per Month</div>
+        <p class="package-desc">
+          Continuous management of your comment-to-DM pipeline so every piece of content becomes a lead source — without any manual effort from your team.
+        </p>
+        <ul class="package-features">
+          <li>
+            <span class="feature-dash">—</span>
+            <span><strong>Comment-to-DM AI Agent</strong> — A fully managed AI system that converts every comment on your content into a private conversation, flooding your inbox with warm, interested prospects with zero manual effort.</span>
+          </li>
+          <li>
+            <span class="feature-dash">—</span>
+            <span><strong>Ongoing optimization</strong> — Continuous refinement of targeting, messaging, and qualification criteria as your market evolves.</span>
+          </li>
+          <li>
+            <span class="feature-dash">—</span>
+            <span><strong>Real-time reporting</strong> — Full visibility on lead volume, engagement, and pipeline health so you always know what's working.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <div class="process-header">
+      <h2 class="process-headline">From signed agreement to live system — in one week.</h2>
+      <p class="process-sub">Five steps. No drawn-out onboarding. No waiting months to see results.</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">Step 01</div>
+        <div class="step-content">
+          <div class="step-title">Secure Your Slot</div>
+          <p class="step-body">Sign the agreement and lock in your spot. We immediately begin the handover process — your slot is held once the agreement is signed, not before.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 02</div>
+        <div class="step-content">
+          <div class="step-title">Deep-Dive Onboarding</div>
+          <p class="step-body">Complete our onboarding doc — offer structure, pricing, target buyer profiles, past client interactions, common objections, and your dedicated phone number for our team's network.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 03</div>
+        <div class="step-content">
+          <div class="step-title">Strategic Kickoff</div>
+          <p class="step-body">We launch a dedicated WhatsApp Group (SCLD × Your Agency) for real-time updates and run an async session to finalize your custom qualification protocols for GCC real estate buyers and sellers.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 04</div>
+        <div class="step-content">
+          <div class="step-title">Inbox & Traffic Takeover</div>
+          <p class="step-body">We configure the automated interaction software to your exact local target demographic and run test DM sequences to confirm flawless execution before going live.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Step 05</div>
+        <div class="step-content">
+          <div class="step-title">We Go Live</div>
+          <p class="step-body">Within week one, the machine is operational. Leads followed up within minutes. Prospects qualified and handed to your agents as warm, ready-to-close leads. You stay 100% in fulfillment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALIFIER -->
+<section id="qualifier">
+  <div class="container">
+    <div class="section-label">Who This Is For</div>
+    <div class="qualifier-inner">
+      <div>
+        <h2 class="qualifier-headline">Built for agencies that are ready, not starting from zero.</h2>
+        <p class="qualifier-body">
+          The SCLD System is designed for early-stage real estate agencies in the GCC already generating around $10k/month — with active agents and real listings — who need a structured system to convert existing attention into consistent closed deals.
+        </p>
+      </div>
+      <div class="qualifier-checks">
+        <div class="check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="check-text">You're generating around $10k/month in GCC real estate</span>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="check-text">You have active agents and real listings — the supply side is handled</span>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="check-text">Your pipeline is inconsistent and you know it's a system problem, not a people problem</span>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="check-text">You want to scale without hiring more staff or managing more complexity</span>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="check-text">You're ready to move now — not in three months when things "calm down"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-headline">
+        Ready to scale<br>your agency?
+      </h2>
+      <div class="cta-right">
+        <p class="cta-body">
+          Book a 20-minute call with us and we'll show you exactly how the SCLD System works for your specific market. No pitch deck. No pressure. Just a clear look at what changes when your lead generation runs on autopilot.
+        </p>
+        <div class="cta-action">
+          <a href="https://calendly.com" target="_blank" class="btn-large">Book Your 20-Minute Call</a>
+          <span class="cta-note">Limited slots available per month — GCC agencies only.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-logo">SCLD Agency</span>
+      <span class="footer-note">Confidential · GCC Real Estate</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Subtle fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.step, .package, .check-item, .problem-callout').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

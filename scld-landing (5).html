@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SCLD Agency — The Sales System for GCC Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --raised: #111111;
+    --white: #ffffff;
+    --off: #d8d8d8;
+    --muted: #5a5a5a;
+    --border: #222222;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 60px;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-btn {
+    font-size: 13px; font-weight: 500; letter-spacing: .06em;
+    color: var(--bg); background: var(--white);
+    text-decoration: none; padding: 10px 26px;
+    border: 1px solid var(--white);
+    transition: background .18s, color .18s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { background: transparent; color: var(--white); }
+
+  /* ── WRAP ── */
+  .wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    width: 100%;
+    padding-top: 148px;
+    padding-bottom: 96px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--muted);
+    display: block; margin-bottom: 36px;
+  }
+  .hero-h {
+    font-size: clamp(40px, 5.5vw, 72px);
+    font-weight: 300; line-height: 1.07; letter-spacing: -.03em;
+    max-width: 760px; margin-bottom: 28px;
+  }
+  .hero-h em { font-style: italic; }
+  .hero-sub {
+    font-size: 17px; font-weight: 300; color: var(--muted);
+    max-width: 480px; line-height: 1.72; margin-bottom: 48px;
+  }
+  .hero-btns { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .btn-primary {
+    font-size: 14px; font-weight: 500; letter-spacing: .05em;
+    color: var(--bg); background: var(--white);
+    text-decoration: none; padding: 15px 40px;
+    border: 1px solid var(--white);
+    transition: background .18s, color .18s;
+  }
+  .btn-primary:hover { background: transparent; color: var(--white); }
+  .btn-link {
+    font-size: 14px; font-weight: 300; color: var(--muted);
+    text-decoration: none; transition: color .18s;
+  }
+  .btn-link:hover { color: var(--white); }
+
+  /* ── MIDDLE: PROBLEM + OFFER ── */
+  #middle {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+  }
+  .middle-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .col-problem {
+    padding: 80px 60px 80px 60px;
+    border-right: 1px solid var(--border);
+  }
+  .col-offer {
+    padding: 80px 60px 80px 60px;
+  }
+  .col-label {
+    font-size: 11px; font-weight: 500; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--muted);
+    display: block; margin-bottom: 36px;
+  }
+  .col-h {
+    font-size: clamp(22px, 2.6vw, 34px);
+    font-weight: 300; line-height: 1.22; letter-spacing: -.02em;
+    margin-bottom: 24px;
+  }
+  .col-h strong { font-weight: 500; }
+  .col-body {
+    font-size: 15px; font-weight: 300; color: var(--muted);
+    line-height: 1.75; margin-bottom: 14px;
+  }
+  .callout {
+    margin-top: 32px; padding: 22px 24px;
+    border: 1px solid var(--border); background: var(--raised);
+    font-size: 15px; font-weight: 400; color: var(--off); line-height: 1.6;
+  }
+
+  /* Offer items */
+  .offer-item {
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+  }
+  .offer-item:last-child { border-bottom: 1px solid var(--border); }
+  .offer-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; gap: 16px;
+    margin-bottom: 10px; flex-wrap: wrap;
+  }
+  .offer-name { font-size: 15px; font-weight: 500; color: var(--white); }
+  .offer-price { font-size: 13px; font-weight: 400; color: var(--off); white-space: nowrap; }
+  .offer-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.68; }
+
+  /* ── PROCESS ── */
+  #process {
+    width: 100%;
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .process-top {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; margin-bottom: 48px; align-items: end;
+  }
+  .process-h {
+    font-size: clamp(22px, 2.6vw, 34px);
+    font-weight: 300; line-height: 1.22; letter-spacing: -.02em;
+  }
+  .process-sub {
+    font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.7;
+  }
+  .steps {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--border);
+  }
+  .step {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .step:last-child { border-right: none; }
+  .step-n {
+    font-size: 11px; font-weight: 500; letter-spacing: .14em;
+    color: var(--muted); display: block; margin-bottom: 14px;
+  }
+  .step-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+  .step-body { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+  /* ── CTA ── */
+  #cta {
+    width: 100%;
+    padding: 96px 0;
+  }
+  .cta-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .cta-h {
+    font-size: clamp(32px, 4.5vw, 58px);
+    font-weight: 300; line-height: 1.1; letter-spacing: -.03em;
+  }
+  .cta-h em { font-style: italic; }
+  .cta-body {
+    font-size: 15px; font-weight: 300; color: var(--muted);
+    line-height: 1.75; margin-bottom: 36px;
+  }
+  .btn-large {
+    display: block; text-align: center;
+    font-size: 14px; font-weight: 500; letter-spacing: .06em;
+    color: var(--bg); background: var(--white);
+    text-decoration: none; padding: 18px 40px;
+    border: 1px solid var(--white);
+    transition: background .18s, color .18s;
+    margin-bottom: 14px;
+  }
+  .btn-large:hover { background: transparent; color: var(--white); }
+  .cta-note {
+    font-size: 12px; font-weight: 300; color: var(--muted);
+    letter-spacing: .04em; text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    width: 100%;
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .f-logo {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+  }
+  .f-note { font-size: 11px; font-weight: 300; color: var(--muted); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    nav { padding: 18px 24px; }
+    .wrap { padding: 0 24px; }
+    .middle-inner { grid-template-columns: 1fr; }
+    .col-problem {
+      padding: 60px 24px;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .col-offer { padding: 60px 24px; }
+    .process-top { grid-template-columns: 1fr; gap: 20px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step { border-bottom: 1px solid var(--border); }
+    .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">SCLD Agency</a>
+  <a href="https://calendly.com/scld-cons/30min" target="_blank" class="nav-btn">Book a Call</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <span class="eyebrow">GCC Real Estate · Done-For-You Lead System</span>
+    <h1 class="hero-h">Your agents should be<br>closing, <em>not chasing.</em></h1>
+    <p class="hero-sub">We install a complete client acquisition system into your agency. Lead generation, outbound, nurture, and qualification — all handled. You just sell.</p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-primary">Book a 20-Minute Call</a>
+      <a href="#middle" class="btn-link">See what's included →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM + OFFER -->
+<section id="middle">
+  <div class="wrap">
+    <div class="middle-inner">
+
+      <div class="col-problem">
+        <span class="col-label">The Problem</span>
+        <h2 class="col-h">Inconsistent months aren't an agent problem. <strong>They're a system problem.</strong></h2>
+        <p class="col-body">Your agents are posting, calling, showing up. But without a structured system converting attention into appointments, the pipeline stays unpredictable.</p>
+        <p class="col-body">No automated inbound. No follow-up sequence. No qualifying filter. Deals fall through the cracks daily.</p>
+        <div class="callout">That's not effort missing — that's infrastructure missing.</div>
+      </div>
+
+      <div class="col-offer">
+        <span class="col-label">What's Included</span>
+        <div class="offer-item">
+          <div class="offer-row">
+            <span class="offer-name">The SCLD System</span>
+            <span class="offer-price">$2,000 — One Time</span>
+          </div>
+          <p class="offer-desc">Full deployment of our proprietary software — 3,000+ targeted daily interactions, DM outbound machine, and a structured nurture sequence that converts warm leads into booked appointments. Built into your agency from scratch.</p>
+        </div>
+        <div class="offer-item">
+          <div class="offer-row">
+            <span class="offer-name">Monthly Retainer</span>
+            <span class="offer-price">$1,000 / month</span>
+          </div>
+          <p class="offer-desc">A fully managed Comment-to-DM AI Agent that turns every comment on your content into a private conversation — flooding your inbox with warm, interested prospects. Zero manual effort from your team.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="process-top">
+      <h2 class="process-h">From signed agreement to live system — in one week.</h2>
+      <p class="process-sub">Five steps. No drawn-out onboarding. Leads followed up within minutes of going live.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">01</span>
+        <div class="step-title">Secure Your Slot</div>
+        <p class="step-body">Sign the agreement. Your slot is held immediately.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <div class="step-title">Deep-Dive Onboarding</div>
+        <p class="step-body">Offer, pricing, buyer profiles, objections — all documented.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <div class="step-title">Strategic Kickoff</div>
+        <p class="step-body">WhatsApp group live. Custom qualification protocols finalized.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <div class="step-title">Traffic Takeover</div>
+        <p class="step-body">Software configured to your exact GCC demographic. Test sequences run.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">05</span>
+        <div class="step-title">We Go Live</div>
+        <p class="step-body">Machine is operational. Warm leads handed to your agents. You close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="wrap">
+    <div class="cta-inner">
+      <h2 class="cta-h">Ready to scale<br>your agency?</h2>
+      <div>
+        <p class="cta-body">Book a 20-minute call. We'll show you exactly how the SCLD System works for your market — no pitch deck, no pressure. Just a clear look at what changes when your lead generation runs on autopilot.</p>
+        <a href="https://calendly.com/scld-cons/30min" target="_blank" class="btn-large">Book Your 20-Minute Call</a>
+        <p class="cta-note">Limited slots available per month</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <span class="f-logo">SCLD Agency</span>
+      <span class="f-note">Confidential · GCC Real Estate</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>

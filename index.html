@@ -1,380 +1,1991 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SCLD Agency — The Sales System for GCC Real Estate</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCLD Agency — Lead Acquisition System for GCC Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #0a0a0a;
-    --raised: #111111;
-    --white: #ffffff;
-    --off: #d8d8d8;
-    --muted: #5a5a5a;
-    --border: #222222;
+  :root{
+    --bg:#0d0d0d;
+    --bg-alt:#14120f;
+    --surface:#161311;
+    --surface-2:#1c1a16;
+    --border:#3a3226;
+    --border-soft:#221d16;
+    --text:#ede8de;
+    --text-dim:#a89f8e;
+    --text-faint:#6b6357;
+    --brass:#C9A24B;
+    --brass-bright:#d9b876;
+    --brass-soft:rgba(201,162,75,.14);
+    --teal:#C9A24B;
+    --teal-soft:rgba(201,162,75,.14);
+    --fit-good:#c9a24b;
+    --fit-good-soft:rgba(201,162,75,.12);
+    --fit-bad:#8a7c66;
+    --fit-bad-soft:rgba(138,124,102,.12);
+    --radius:3px;
+    --maxw:1160px;
   }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    font-size: 16px;
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:radial-gradient(ellipse 1400px 900px at 50% -10%, #17140f 0%, #100e0b 45%, #0a0806 100%);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
   }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.025; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  ::selection{ background:var(--brass); color:#0d0d0d; }
+  a{ color:inherit; text-decoration:none; }
+  img{max-width:100%; display:block;}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 22px 60px;
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo {
-    font-size: 12px; font-weight: 600;
-    letter-spacing: .22em; text-transform: uppercase;
-    color: var(--white); text-decoration: none;
-  }
-  .nav-btn {
-    font-size: 13px; font-weight: 500; letter-spacing: .06em;
-    color: var(--bg); background: var(--white);
-    text-decoration: none; padding: 10px 26px;
-    border: 1px solid var(--white);
-    transition: background .18s, color .18s;
-    white-space: nowrap;
-  }
-  .nav-btn:hover { background: transparent; color: var(--white); }
-
-  /* ── WRAP ── */
-  .wrap {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 60px;
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
   }
 
-  /* ── HERO ── */
-  #hero {
-    width: 100%;
-    padding-top: 148px;
-    padding-bottom: 96px;
-    border-bottom: 1px solid var(--border);
-  }
-  .eyebrow {
-    font-size: 11px; font-weight: 500; letter-spacing: .22em;
-    text-transform: uppercase; color: var(--muted);
-    display: block; margin-bottom: 36px;
-  }
-  .hero-h {
-    font-size: clamp(40px, 5.5vw, 72px);
-    font-weight: 300; line-height: 1.07; letter-spacing: -.03em;
-    max-width: 760px; margin-bottom: 28px;
-  }
-  .hero-h em { font-style: italic; }
-  .hero-sub {
-    font-size: 17px; font-weight: 300; color: var(--muted);
-    max-width: 480px; line-height: 1.72; margin-bottom: 48px;
-  }
-  .hero-btns { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-  .btn-primary {
-    font-size: 14px; font-weight: 500; letter-spacing: .05em;
-    color: var(--bg); background: var(--white);
-    text-decoration: none; padding: 15px 40px;
-    border: 1px solid var(--white);
-    transition: background .18s, color .18s;
-  }
-  .btn-primary:hover { background: transparent; color: var(--white); }
-  .btn-link {
-    font-size: 14px; font-weight: 300; color: var(--muted);
-    text-decoration: none; transition: color .18s;
-  }
-  .btn-link:hover { color: var(--white); }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
 
-  /* ── MIDDLE: PROBLEM + OFFER ── */
-  #middle {
-    width: 100%;
-    border-bottom: 1px solid var(--border);
+  h1,h2,h3{ font-family:'Playfair Display', serif; font-weight:500; letter-spacing:0; line-height:1.08; text-transform:none; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Inter', sans-serif; font-weight:300;
+    font-size:11.5px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--brass);
   }
-  .middle-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-  .col-problem {
-    padding: 80px 60px 80px 60px;
-    border-right: 1px solid var(--border);
-  }
-  .col-offer {
-    padding: 80px 60px 80px 60px;
-  }
-  .col-label {
-    font-size: 11px; font-weight: 500; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--muted);
-    display: block; margin-bottom: 36px;
-  }
-  .col-h {
-    font-size: clamp(22px, 2.6vw, 34px);
-    font-weight: 300; line-height: 1.22; letter-spacing: -.02em;
-    margin-bottom: 24px;
-  }
-  .col-h strong { font-weight: 500; }
-  .col-body {
-    font-size: 15px; font-weight: 300; color: var(--muted);
-    line-height: 1.75; margin-bottom: 14px;
-  }
-  .callout {
-    margin-top: 32px; padding: 22px 24px;
-    border: 1px solid var(--border); background: var(--raised);
-    font-size: 15px; font-weight: 400; color: var(--off); line-height: 1.6;
+  .eyebrow::before{
+    content:""; width:5px; height:5px; border-radius:50%;
+    background:var(--brass); box-shadow:0 0 0 4px var(--brass-soft);
   }
 
-  /* Offer items */
-  .offer-item {
-    padding: 24px 0;
-    border-top: 1px solid var(--border);
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:15px 30px; border-radius:2px;
+    font-family:'Inter', sans-serif; font-weight:500; font-size:12.5px;
+    letter-spacing:0.08em; text-transform:uppercase;
+    cursor:pointer; border:1px solid transparent; transition:transform .15s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    white-space:nowrap;
   }
-  .offer-item:last-child { border-bottom: 1px solid var(--border); }
-  .offer-row {
-    display: flex; justify-content: space-between;
-    align-items: baseline; gap: 16px;
-    margin-bottom: 10px; flex-wrap: wrap;
-  }
-  .offer-name { font-size: 15px; font-weight: 500; color: var(--white); }
-  .offer-price { font-size: 13px; font-weight: 400; color: var(--off); white-space: nowrap; }
-  .offer-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.68; }
+  .btn-primary{ background:var(--brass); color:#0d0d0d; }
+  .btn-primary:hover{ background:var(--brass-bright); transform:translateY(-1px); }
+  .btn-ghost{ background:transparent; color:var(--text); border-color:var(--border); }
+  .btn-ghost:hover{ border-color:var(--brass); color:var(--brass); }
 
-  /* ── PROCESS ── */
-  #process {
-    width: 100%;
-    padding: 80px 0;
-    border-bottom: 1px solid var(--border);
+  /* ===== HEADER ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,9,7,0.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
   }
-  .process-top {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 60px; margin-bottom: 48px; align-items: end;
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .logo{ font-family:'Playfair Display', serif; font-weight:600; font-size:22px; letter-spacing:0.02em; }
+  .logo span{ color:var(--brass); }
+  .nav .btn{ padding:11px 22px; font-size:11.5px; }
+  .btn-nav-gold{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:10px 22px; border-radius:2px; border:1px solid var(--brass);
+    font-family:'Inter', sans-serif; font-weight:500; font-size:11.5px;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--brass);
+    background:transparent; transition:background .2s ease, color .2s ease;
   }
-  .process-h {
-    font-size: clamp(22px, 2.6vw, 34px);
-    font-weight: 300; line-height: 1.22; letter-spacing: -.02em;
-  }
-  .process-sub {
-    font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.7;
-  }
-  .steps {
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    border: 1px solid var(--border);
-  }
-  .step {
-    padding: 28px 24px;
-    border-right: 1px solid var(--border);
-  }
-  .step:last-child { border-right: none; }
-  .step-n {
-    font-size: 11px; font-weight: 500; letter-spacing: .14em;
-    color: var(--muted); display: block; margin-bottom: 14px;
-  }
-  .step-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
-  .step-body { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+  .btn-nav-gold:hover{ background:var(--brass); color:#0d0d0d; }
+  .nav-right{ display:flex; align-items:center; gap:14px; }
 
-  /* ── CTA ── */
-  #cta {
-    width: 100%;
-    padding: 96px 0;
+  /* ===== HERO ===== */
+  .hero{ position:relative; overflow:hidden; padding:96px 0 84px; border-bottom:1px solid var(--border-soft); }
+  .hero-inner{ position:relative; z-index:1; max-width:760px; }
+  .hero h1{ font-size:clamp(42px, 6.4vw, 78px); margin:20px 0 22px; }
+  .hero h1 em{ font-style:italic; font-weight:400; color:var(--brass); }
+  .hero p.sub{ font-size:19px; color:var(--text-dim); max-width:560px; margin-bottom:36px; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  /* ===== SECTION SHELL ===== */
+  section{ padding:88px 0; border-bottom:1px solid var(--border-soft); }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head h2{ font-size:clamp(30px, 4vw, 44px); margin-top:14px; }
+  .section-head p{ color:var(--text-dim); font-size:16.5px; margin-top:14px; }
+
+  /* ===== PROBLEM ===== */
+  .problem{ padding:72px 0; }
+  .problem .wrap{ max-width:780px; }
+  .problem h2{ font-size:clamp(28px, 4vw, 40px); margin-top:14px; }
+  .problem p{ color:var(--text-dim); font-size:18px; margin-top:16px; max-width:640px; }
+  .problem p.tight{ color:var(--text); font-weight:500; }
+
+  /* ===== VIDEO SLOT ===== */
+  .console{
+    margin-top:44px;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    overflow:hidden;
   }
-  .cta-inner {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: center;
+  .console-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px; border-bottom:1px solid var(--border);
+    font-family:'Inter', sans-serif; font-size:12px; color:var(--text-faint);
   }
-  .cta-h {
-    font-size: clamp(32px, 4.5vw, 58px);
-    font-weight: 300; line-height: 1.1; letter-spacing: -.03em;
+  .console-bar .dot{ width:9px; height:9px; border-radius:50%; background:var(--border); }
+  .console-bar .dots{ display:flex; gap:6px; }
+  .console-body{
+    aspect-ratio:16/8; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(201,162,75,.08), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(201,162,75,.06), transparent 55%);
   }
-  .cta-h em { font-style: italic; }
-  .cta-body {
-    font-size: 15px; font-weight: 300; color: var(--muted);
-    line-height: 1.75; margin-bottom: 36px;
+  .play-btn{
+    width:64px; height:64px; border-radius:50%;
+    background:var(--brass-soft); border:1px solid var(--brass);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition:transform .2s ease;
   }
-  .btn-large {
-    display: block; text-align: center;
-    font-size: 14px; font-weight: 500; letter-spacing: .06em;
-    color: var(--bg); background: var(--white);
-    text-decoration: none; padding: 18px 40px;
-    border: 1px solid var(--white);
-    transition: background .18s, color .18s;
-    margin-bottom: 14px;
+  .play-btn:hover{ transform:scale(1.06); }
+  .console-body .cap{ font-family:'Inter', sans-serif; font-size:13px; color:var(--text-faint); }
+
+  /* ===== SYSTEM STEPS ===== */
+  .steps{ margin-top:8px; position:relative; }
+  .steps::before{
+    content:""; position:absolute; left:23px; top:14px; bottom:14px; width:1px;
+    background:linear-gradient(var(--border), var(--border) 70%, transparent);
   }
-  .btn-large:hover { background: transparent; color: var(--white); }
-  .cta-note {
-    font-size: 12px; font-weight: 300; color: var(--muted);
-    letter-spacing: .04em; text-align: center;
+  .step{ display:flex; gap:24px; padding:22px 0; }
+  .step-num{
+    flex:0 0 48px; height:48px; border-radius:50%;
+    background:var(--surface); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Inter', sans-serif; font-size:14px; color:var(--brass);
+    position:relative; z-index:1;
+  }
+  .step-body h3{ font-family:'Inter', sans-serif; font-weight:600; font-size:18px; letter-spacing:0; }
+  .step-body p{ color:var(--text-dim); font-size:15.5px; margin-top:5px; max-width:520px; }
+
+  /* ===== LIVE FEED ===== */
+  .live-panel{
+    border:1px solid var(--border); border-radius:var(--radius);
+    background:var(--surface); overflow:hidden;
+  }
+  .live-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 22px; border-bottom:1px solid var(--border);
+  }
+  .live-tag{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'Inter', sans-serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--teal);
+  }
+  .live-dot{ width:7px; height:7px; border-radius:50%; background:var(--teal); animation:pulse 1.6s infinite; }
+  @keyframes pulse{ 0%,100%{ box-shadow:0 0 0 0 var(--teal-soft);} 50%{ box-shadow:0 0 0 6px var(--teal-soft);} }
+  .live-note{ font-family:'Inter', sans-serif; font-size:11.5px; color:var(--text-faint); }
+  .feed{ list-style:none; max-height:392px; overflow:hidden; position:relative; }
+  .feed-row{
+    display:flex; align-items:center; gap:14px;
+    padding:15px 22px; border-bottom:1px solid var(--border-soft);
+    animation:slideIn .5s ease both;
+  }
+  @keyframes slideIn{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+  .feed-avatar{
+    flex:0 0 34px; height:34px; border-radius:50%;
+    background:var(--surface-2); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Inter', sans-serif; font-size:12px; color:var(--brass);
+  }
+  .feed-main{ flex:1; min-width:0; }
+  .feed-main .name{ font-weight:600; font-size:14.5px; }
+  .feed-main .city{ color:var(--text-faint); font-size:13px; }
+  .feed-status{
+    font-family:'Inter', sans-serif; font-size:12px;
+    padding:5px 10px; border-radius:6px; white-space:nowrap;
+    background:var(--teal-soft); color:var(--teal); border:1px solid rgba(201,162,75,.25);
+  }
+  .feed-time{ font-family:'Inter', sans-serif; font-size:11.5px; color:var(--text-faint); flex:0 0 auto; width:52px; text-align:right; }
+
+  /* ===== SERVICES / ORBIT SYSTEM ===== */
+  .orbit-scroller{ position:relative; height:340vh; margin-top:8px; }
+  .orbit-sticky{
+    position:sticky; top:96px; height:560px;
+    display:flex; align-items:center; gap:68px;
+  }
+  .orbit-visual{ position:relative; width:500px; height:500px; flex:0 0 500px; }
+  .orbit-visual::before{
+    content:""; position:absolute; inset:-40px; border-radius:50%; z-index:0;
+    background:radial-gradient(circle at 50% 50%, rgba(201,162,75,.07), transparent 62%);
+    pointer-events:none;
+  }
+  .orbit-lines{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .orbit-ring{
+    fill:none; stroke:var(--border); stroke-width:1;
+    transform-origin:240px 240px; animation:orbitRingSpin 90s linear infinite;
+  }
+  @keyframes orbitRingSpin{ to{ transform:rotate(360deg); } }
+  .orbit-line{
+    fill:none; stroke:var(--border); stroke-width:1.5; stroke-dasharray:6 7;
+    transition:stroke .5s ease, opacity .5s ease; opacity:.5;
+  }
+  .orbit-line.active{ stroke:var(--teal); opacity:1; animation:orbitDash 2.2s linear infinite; }
+  @keyframes orbitDash{ to{ stroke-dashoffset:-130; } }
+
+  .orbit-hub{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:154px; height:154px; z-index:2;
+  }
+  .orbit-hub-ring{
+    position:absolute; inset:0; border-radius:50%;
+    border:1px solid var(--brass); opacity:.5;
+    animation:hubPulse 2.8s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  .orbit-hub-ring-outer{
+    position:absolute; inset:-16px; border-radius:50%;
+    border:1px solid rgba(201,162,75,.3); opacity:.4;
+    animation:hubPulse 2.8s cubic-bezier(.4,0,.2,1) infinite 1.4s;
+  }
+  @keyframes hubPulse{ 0%,100%{ transform:scale(1); opacity:.5;} 50%{ transform:scale(1.12); opacity:.1;} }
+  .orbit-hub-core{
+    position:absolute; inset:6px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--brass-soft), var(--surface) 70%);
+    border:1px solid var(--brass);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    text-align:center;
+    box-shadow:0 0 46px rgba(201,162,75,.32), 0 0 90px rgba(201,162,75,.08), inset 0 0 22px rgba(201,162,75,.1);
+  }
+  .hub-eyebrow{ font-family:'Inter', sans-serif; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); }
+  .hub-label{ font-family:'Playfair Display', serif; font-weight:600; font-size:18px; line-height:1.02; color:var(--brass-bright); margin-top:2px; }
+
+  .orbit-node{
+    position:absolute; width:96px; height:96px; transform:translate(-50%,-50%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px;
+    z-index:2;
+  }
+  .orbit-node[data-node="0"]{ top:8.5%; left:50%; }
+  .orbit-node[data-node="1"]{ top:50%; left:91.5%; }
+  .orbit-node[data-node="2"]{ top:91.5%; left:50%; }
+  .orbit-node[data-node="3"]{ top:50%; left:8.5%; }
+
+  .node-dot{
+    width:58px; height:58px; border-radius:50%;
+    background:var(--surface); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-faint);
+    transition:border-color .4s cubic-bezier(.4,0,.2,1), color .4s cubic-bezier(.4,0,.2,1), background .4s cubic-bezier(.4,0,.2,1), transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s cubic-bezier(.4,0,.2,1);
+  }
+  .node-dot svg{ width:24px; height:24px; stroke:currentColor; fill:none; stroke-width:1.6; }
+  .orbit-node .node-num{
+    font-family:'Inter', sans-serif; font-size:11px; color:var(--text-faint);
+    letter-spacing:.06em; transition:color .4s ease;
+  }
+  .orbit-node.active .node-dot{ border-color:var(--teal); color:var(--teal); background:var(--teal-soft); box-shadow:0 0 16px rgba(201,162,75,.2); }
+  .orbit-node.active .node-num{ color:var(--teal); }
+  .orbit-node.current .node-dot{
+    border-color:var(--brass); color:var(--brass); background:var(--brass-soft);
+    transform:scale(1.14); box-shadow:0 0 30px rgba(201,162,75,.4);
+  }
+  .orbit-node.current .node-num{ color:var(--brass-bright); }
+
+  .orbit-panel{ flex:1; min-width:0; display:flex; flex-direction:column; }
+  .orbit-progress{ display:flex; gap:8px; margin-bottom:28px; }
+  .orbit-progress-dot{ width:26px; height:3px; border-radius:2px; background:var(--border); transition:background .4s ease, box-shadow .4s ease; }
+  .orbit-progress-dot.active{ background:var(--brass); box-shadow:0 0 8px rgba(201,162,75,.4); }
+  .orbit-cards{ position:relative; flex:1; min-height:220px; }
+  .orbit-card{
+    position:absolute; inset:0;
+    opacity:0; transform:translateX(28px); pointer-events:none;
+    transition:opacity .5s cubic-bezier(.16,.8,.28,1), transform .5s cubic-bezier(.16,.8,.28,1);
+  }
+  .orbit-card.active{ opacity:1; transform:translateX(0); pointer-events:auto; }
+  .orbit-card{ overflow:visible; }
+  .orbit-card .card-num{
+    position:absolute; top:-18px; left:-4px; z-index:0; pointer-events:none;
+    font-family:'Playfair Display', serif; font-weight:600; font-size:128px;
+    color:var(--brass); opacity:.07; letter-spacing:0; line-height:1;
+  }
+  .orbit-card h3{ position:relative; z-index:1; font-family:'Playfair Display', serif; font-weight:500; font-size:28px; letter-spacing:0; margin:58px 0 14px; }
+  .orbit-card p{ position:relative; z-index:1; color:var(--text-dim); font-size:16.5px; max-width:460px; }
+
+  /* ---- mobile fallback: simplified vertical stack, no pinning ---- */
+  .orbit-mobile{ display:none; }
+  .orbit-mobile-hub{
+    display:flex; flex-direction:column; align-items:flex-start; gap:4px;
+    padding:20px 22px; border:1px solid var(--brass); border-radius:var(--radius);
+    background:linear-gradient(160deg, var(--surface), var(--bg-alt));
+    box-shadow:0 0 30px rgba(201,162,75,.18);
+  }
+  .orbit-mobile-hub .hub-label{ font-size:20px; }
+  .orbit-mobile-steps{ margin-top:8px; position:relative; }
+  .orbit-mobile-steps::before{
+    content:""; position:absolute; left:27px; top:10px; bottom:10px; width:1px;
+    background:linear-gradient(var(--border), var(--border) 85%, transparent);
+  }
+  .orbit-mobile-step{
+    display:flex; gap:20px; padding:22px 0; position:relative; overflow:visible;
+    opacity:0; transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .orbit-mobile-step.visible{ opacity:1; transform:translateY(0); }
+  .orbit-mobile-step .node-dot{ flex:0 0 56px; position:relative; z-index:1; transition:border-color .5s ease, color .5s ease, background .5s ease; }
+  .orbit-mobile-step.visible .node-dot{ border-color:var(--teal); color:var(--teal); background:var(--teal-soft); box-shadow:0 0 14px rgba(201,162,75,.2); }
+  .omstep-body{ position:relative; }
+  .omstep-body .card-num{
+    position:absolute; top:-14px; right:0; z-index:0; pointer-events:none;
+    font-family:'Playfair Display', serif; font-weight:600; font-size:72px; color:var(--brass); opacity:.08; line-height:1;
+  }
+  .omstep-body h3{ position:relative; z-index:1; font-family:'Playfair Display', serif; font-weight:500; font-size:19px; letter-spacing:0; margin:4px 0 6px; }
+  .omstep-body p{ position:relative; z-index:1; color:var(--text-dim); font-size:15px; max-width:480px; }
+
+  @media (max-width:900px){
+    .orbit-scroller{ display:none; }
+    .orbit-mobile{ display:block; }
   }
 
-  /* ── FOOTER ── */
-  footer {
-    width: 100%;
-    border-top: 1px solid var(--border);
-    padding: 28px 0;
-  }
-  .footer-inner {
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .f-logo {
-    font-size: 11px; font-weight: 600;
-    letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
-  }
-  .f-note { font-size: 11px; font-weight: 300; color: var(--muted); }
+  /* ===== PARTNERSHIP ===== */
+  #partnership{ --neon:#C9A24B; --neon-soft:rgba(201,162,75,.14); }
+  .partnership-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:stretch; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 860px) {
-    nav { padding: 18px 24px; }
-    .wrap { padding: 0 24px; }
-    .middle-inner { grid-template-columns: 1fr; }
-    .col-problem {
-      padding: 60px 24px;
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-    }
-    .col-offer { padding: 60px 24px; }
-    .process-top { grid-template-columns: 1fr; gap: 20px; }
-    .steps { grid-template-columns: 1fr 1fr; }
-    .step { border-bottom: 1px solid var(--border); }
-    .cta-inner { grid-template-columns: 1fr; gap: 40px; }
-    .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+  /* ---- Left: SCLD Core Engine console panel ---- */
+  .core-engine{
+    position:relative; height:520px; display:flex; flex-direction:column;
+    border-radius:4px; overflow:hidden;
+    background:rgba(20,17,13,.55);
+    -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+    border:1px solid rgba(201,162,75,.16);
+    box-shadow:0 34px 80px -18px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.03);
+  }
+  .core-engine-bar{
+    display:flex; align-items:center; gap:12px; flex:0 0 auto;
+    padding:15px 20px; border-bottom:1px solid rgba(201,162,75,.14);
+    background:rgba(255,255,255,.02);
+  }
+  .core-engine-dots{ display:flex; gap:6px; }
+  .core-engine-dots span{ width:9px; height:9px; border-radius:50%; background:var(--border); }
+  .core-engine-title{
+    font-family:'Inter', sans-serif; font-size:12.5px; letter-spacing:.05em; color:var(--text-dim);
+  }
+  .core-engine-status{ color:var(--neon); text-shadow:0 0 10px rgba(201,162,75,.5); }
+  .core-engine-live{
+    margin-left:auto; width:7px; height:7px; border-radius:50%;
+    background:var(--neon); box-shadow:0 0 0 3px var(--neon-soft);
+    animation:pulse 1.6s infinite;
+  }
+
+  .core-engine-body{
+    position:relative; flex:1; overflow:hidden; padding:0 16px;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 8%, #000 94%, transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0, #000 8%, #000 94%, transparent 100%);
+  }
+  .core-engine-stream{
+    height:100%; overflow-y:auto; scrollbar-width:none;
+    display:flex; flex-direction:column; gap:12px; padding:18px 2px;
+  }
+  .core-engine-stream::-webkit-scrollbar{ display:none; }
+
+  .stream-item{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:14px 16px; border-radius:4px;
+    background:var(--surface); border:1px solid var(--border);
+    transition:border-color .3s ease, box-shadow .3s ease;
+  }
+  .stream-item.new{ animation:streamIn .5s ease both; }
+  @keyframes streamIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+  .stream-icon{
+    flex:0 0 30px; width:30px; height:30px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--neon-soft); color:var(--neon);
+  }
+  .stream-icon svg{ width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+  .stream-tag{ font-family:'Inter', sans-serif; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--neon); }
+  .stream-text{ font-size:13.5px; color:var(--text); line-height:1.42; margin-top:3px; }
+  .stream-time{ font-size:10px; color:var(--text-faint); margin-top:5px; }
+
+  /* ---- Right: interactive delivery timeline ---- */
+  .delivery-timeline{ position:relative; padding:4px 0; }
+  .delivery-timeline::before{
+    content:""; position:absolute; left:27px; top:20px; bottom:20px; width:1px;
+    background:linear-gradient(var(--border), var(--border) 88%, transparent);
+  }
+  .timeline-step{ position:relative; display:flex; gap:22px; padding:20px 0; }
+  .timeline-node{
+    position:relative; z-index:1; flex:0 0 56px; width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--surface); border:1px solid var(--border); color:var(--text-faint);
+    transition:border-color .35s ease, color .35s ease, background .35s ease, box-shadow .35s ease, transform .35s ease;
+  }
+  .timeline-node svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .timeline-card{
+    flex:1; padding:22px 26px; border-radius:4px;
+    background:var(--surface); border:1px solid var(--border);
+    transition:border-color .35s ease, box-shadow .35s ease, transform .35s ease, background .35s ease;
+  }
+  .timeline-card h3{ font-family:'Inter', sans-serif; font-weight:600; font-size:17.5px; letter-spacing:0; margin-bottom:8px; }
+  .timeline-card p{ color:var(--text-dim); font-size:15px; line-height:1.55; }
+
+  .timeline-step.active .timeline-node,
+  .timeline-step:hover .timeline-node{
+    border-color:var(--neon); color:var(--neon); background:var(--neon-soft);
+    box-shadow:0 0 0 6px rgba(201,162,75,.1), 0 0 24px rgba(201,162,75,.35);
+    transform:scale(1.06);
+  }
+  .timeline-step.active .timeline-card,
+  .timeline-step:hover .timeline-card{
+    border-color:rgba(201,162,75,.4);
+    box-shadow:0 20px 50px -22px rgba(201,162,75,.3);
+    transform:translateX(4px);
+    background:linear-gradient(160deg, var(--surface), rgba(201,162,75,.045));
+  }
+
+  .timeline-step-quote .timeline-node{
+    color:var(--neon); background:var(--neon-soft); border-color:rgba(201,162,75,.35);
+  }
+  .timeline-quote{
+    background:var(--neon-soft); border-color:rgba(201,162,75,.25);
+  }
+  .timeline-quote p{ font-size:16px; color:var(--text); line-height:1.5; font-style:normal; }
+
+  @media (max-width:820px){
+    .partnership-grid{ grid-template-columns:1fr; gap:36px; }
+    .core-engine{ height:440px; }
+  }
+
+
+  /* ===== PRICING ===== */
+  .price-block{
+    border:1px solid var(--brass); border-radius:4px;
+    background:linear-gradient(160deg, var(--surface), var(--bg-alt));
+    padding:52px; position:relative; overflow:hidden;
+  }
+  .price-block::before{
+    content:""; position:absolute; top:-60px; right:-60px; width:220px; height:220px;
+    background:radial-gradient(circle, var(--brass-soft), transparent 70%);
+  }
+  .price-top{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:20px; position:relative; z-index:1;}
+  .price-top h3{ font-size:30px; }
+  .price-nums{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .price-nums .amt{ font-family:'Playfair Display', serif; font-weight:600; font-size:46px; color:var(--brass); }
+  .price-nums .lbl{ font-size:13px; color:var(--text-faint); font-family:'Inter', sans-serif; }
+  .price-plus{ font-size:22px; color:var(--text-faint); padding:0 4px; }
+  .price-desc{ color:var(--text-dim); font-size:16px; margin:26px 0 30px; max-width:640px; position:relative; z-index:1; }
+  .price-list{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:12px 28px; margin-bottom:34px; position:relative; z-index:1; }
+  .price-list li{ display:flex; gap:10px; align-items:flex-start; font-size:14.5px; color:var(--text-dim); }
+  .price-list li::before{ content:"—"; color:var(--brass); flex:0 0 auto; }
+  .price-block .btn{ position:relative; z-index:1; }
+
+  /* ===== GUARANTEE ===== */
+  @property --border-angle{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
+
+  #guarantee{ padding:104px 0; }
+  .guarantee-card{
+    position:relative; max-width:640px; margin:0 auto; text-align:center;
+    border-radius:6px; padding:68px 48px 44px;
+    background:linear-gradient(160deg, rgba(20,17,13,.62), rgba(13,11,8,.72));
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+    border:1px solid rgba(201,162,75,.14);
+    box-shadow:0 0 0 1px rgba(201,162,75,.05), 0 40px 100px -20px rgba(0,0,0,.6);
+    overflow:hidden; isolation:isolate;
+  }
+  /* rotating metallic edge, like a premium card catching light */
+  .guarantee-card::before{
+    content:""; position:absolute; inset:0; border-radius:6px; padding:1.4px;
+    background:conic-gradient(from var(--border-angle),
+      transparent 0%, var(--teal) 10%, var(--brass-bright) 20%, transparent 32%,
+      transparent 62%, var(--brass-bright) 74%, var(--teal) 84%, transparent 96%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    animation:rotateBorder 7s linear infinite; pointer-events:none; z-index:2;
+  }
+  @keyframes rotateBorder{ to{ --border-angle:360deg; } }
+
+  /* pulsing aurora glow behind the shield */
+  .guarantee-aurora{
+    position:absolute; top:-60px; left:50%; width:360px; height:360px;
+    transform:translateX(-50%); border-radius:50%; z-index:0; pointer-events:none;
+    background:radial-gradient(circle, rgba(201,162,75,.32), rgba(201,162,75,.08) 45%, transparent 70%);
+    filter:blur(28px); animation:auroraPulse 5s ease-in-out infinite;
+  }
+  @keyframes auroraPulse{
+    0%,100%{ opacity:.45; transform:translateX(-50%) scale(.9); }
+    50%{ opacity:.9; transform:translateX(-50%) scale(1.08); }
+  }
+
+  .guarantee-badge{
+    position:relative; z-index:1; width:84px; height:84px; margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center;
+    filter:drop-shadow(0 0 22px rgba(201,162,75,.4));
+    transform-style:preserve-3d; transition:transform .35s cubic-bezier(.2,.8,.2,1);
+    will-change:transform;
+  }
+  .guarantee-badge .badge-frame{ fill:var(--surface); stroke:var(--teal); stroke-width:2; }
+
+  .guarantee-eyebrow-wrap{
+    position:relative; z-index:1; display:flex; justify-content:center; margin-bottom:12px;
+  }
+  .guarantee-card .eyebrow::before{ animation:liveDotPulse 1.8s infinite; }
+  @keyframes liveDotPulse{
+    0%{ box-shadow:0 0 0 0 rgba(201,162,75,.55); }
+    70%{ box-shadow:0 0 0 8px rgba(201,162,75,0); }
+    100%{ box-shadow:0 0 0 0 rgba(201,162,75,0); }
+  }
+
+  .guarantee-number{
+    position:relative; z-index:1;
+    font-family:'Playfair Display', serif; font-weight:600;
+    font-size:clamp(84px, 12vw, 140px); line-height:0.84; color:var(--teal);
+    margin:14px 0 4px;
+    text-shadow:0 0 30px rgba(201,162,75,.55), 0 0 90px rgba(201,162,75,.28);
+    font-variant-numeric:tabular-nums;
+  }
+  .guarantee-headline{
+    position:relative; z-index:1;
+    font-size:clamp(24px, 3.2vw, 34px); margin:6px auto 18px; max-width:520px;
+  }
+  .guarantee-sub{
+    position:relative; z-index:1;
+    color:var(--text-dim); font-size:16px; max-width:480px; margin:0 auto;
+  }
+
+  /* trust seal footer */
+  .guarantee-seal{
+    position:relative; z-index:1; margin-top:38px; padding-top:26px;
+    border-top:1px solid rgba(201,162,75,.16);
+    display:flex; align-items:center; justify-content:center; gap:14px;
+  }
+  .guarantee-seal svg{ flex:0 0 auto; }
+  .guarantee-seal-text{ text-align:left; }
+  .guarantee-seal-text .seal-line1{
+    font-family:'Inter', sans-serif; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--text-faint);
+  }
+  .guarantee-seal-text .seal-line2{
+    font-family:'Playfair Display', serif; font-size:15px; font-weight:600;
+    color:var(--text-dim); margin-top:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .guarantee-card::before, .guarantee-aurora, .guarantee-card .eyebrow::before{ animation:none; }
+  }
+
+  @media (max-width:640px){
+    .guarantee-card{ padding:52px 26px 34px; }
+    .guarantee-seal{ flex-direction:column; gap:10px; text-align:center; }
+    .guarantee-seal-text{ text-align:center; }
+  }
+
+  /* ===== MARKETS ===== */
+  .markets-row{ display:flex; gap:20px; flex-wrap:wrap; }
+  .market-card{
+    flex:1 1 260px; border:1px solid var(--border); border-radius:var(--radius);
+    background:var(--surface); padding:26px; display:flex; align-items:center; gap:16px;
+  }
+  .market-card .flag{ font-size:34px; line-height:1; }
+  .market-card h3{ font-family:'Inter', sans-serif; font-weight:600; font-size:17px; letter-spacing:0; }
+  .market-card .tier{ font-family:'Inter', sans-serif; font-size:11.5px; color:var(--teal); text-transform:uppercase; letter-spacing:.08em; margin-top:2px; }
+  .markets-line{ margin-top:26px; color:var(--text-dim); font-size:15px; }
+
+  /* ===== FAQ ===== */
+  .faq-item{ border-bottom:1px solid var(--border); }
+  .faq-item:first-child{ border-top:1px solid var(--border); }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:26px 2px; cursor:pointer; font-family:'Playfair Display', serif; font-weight:500; font-size:19px;
+  }
+  .faq-q .idx{ font-family:'Inter', sans-serif; color:var(--brass); font-weight:400; margin-right:14px; font-size:13px; letter-spacing:.06em; }
+  .faq-plus{ flex:0 0 auto; width:22px; height:22px; position:relative; }
+  .faq-plus::before, .faq-plus::after{
+    content:""; position:absolute; background:var(--brass); border-radius:1px;
+  }
+  .faq-plus::before{ width:14px; height:2px; top:10px; left:4px; }
+  .faq-plus::after{ width:2px; height:14px; top:4px; left:10px; transition:transform .2s ease, opacity .2s ease; }
+  .faq-item.open .faq-plus::after{ transform:rotate(90deg); opacity:0; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .faq-item.open .faq-a{ max-height:260px; }
+  .faq-a p{ color:var(--text-dim); font-size:15.5px; padding:0 2px 26px 42px; max-width:600px; }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta{ text-align:center; border-bottom:none; padding:100px 0 90px; }
+  .final-cta h2{ font-size:clamp(32px, 5vw, 54px); margin:14px auto 18px; max-width:680px; }
+  .final-cta p.sub{ color:var(--text-dim); font-size:17px; max-width:520px; margin:0 auto 34px; }
+  .final-cta .btn{ padding:17px 32px; font-size:16px; }
+  .urgency{ margin-top:18px; font-family:'Inter', sans-serif; font-size:12.5px; color:var(--text-faint); letter-spacing:.04em; }
+
+  .cta-activity-card{
+    max-width:480px; margin:0 auto 36px; text-align:left;
+    border:1px solid var(--border); border-radius:var(--radius);
+    background:var(--surface); overflow:hidden;
+    box-shadow:0 0 50px rgba(201,162,75,.08);
+  }
+  .cta-activity-head{
+    display:flex; align-items:center; gap:8px;
+    padding:14px 22px; border-bottom:1px solid var(--border);
+    font-family:'Inter', sans-serif; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--teal);
+  }
+  .cta-live-dot{
+    width:7px; height:7px; border-radius:50%; background:#C9A24B;
+    animation:ctaPulseGreen 1.6s infinite;
+  }
+  @keyframes ctaPulseGreen{ 0%,100%{ box-shadow:0 0 0 0 rgba(201,162,75,.4); } 50%{ box-shadow:0 0 0 6px rgba(201,162,75,.12); } }
+  .cta-activity-body{ padding:26px 26px 24px; }
+  .cta-counter-row{ display:flex; align-items:baseline; gap:8px; }
+  .cta-counter{
+    font-family:'Playfair Display', serif; font-weight:600;
+    font-size:clamp(48px, 7vw, 68px); line-height:0.88; color:var(--brass-bright);
+    text-shadow:0 0 30px rgba(201,162,75,.3);
+  }
+  .cta-counter-total{ font-family:'Inter', sans-serif; font-size:15px; color:var(--text-faint); }
+  .cta-counter-label{ color:var(--text-dim); font-size:14px; margin-top:4px; }
+  .cta-progress-track{
+    height:5px; border-radius:4px; background:var(--border-soft);
+    overflow:hidden; margin-top:20px;
+  }
+  .cta-progress-fill{
+    height:100%; border-radius:4px;
+    background:linear-gradient(90deg, var(--teal), var(--brass));
+    width:0%; transition:width 1.6s cubic-bezier(.16,.8,.28,1);
+  }
+  .cta-btn-sub{ margin-top:14px; font-size:13.5px; color:var(--text-faint); }
+
+  footer{ padding:34px 0; }
+  footer .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  footer .logo{ font-size:16px; }
+  footer .fine{ color:var(--text-faint); font-size:12.5px; font-family:'Inter', sans-serif; }
+
+  /* ===== FIT CHECK ===== */
+  .fit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
+  .fit-card{
+    border:1px solid var(--border); border-radius:var(--radius);
+    background:var(--surface); padding:36px;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, opacity .25s ease;
+  }
+  .fit-card h3{
+    font-family:'Playfair Display', serif; font-weight:600; font-size:22px;
+    letter-spacing:0; margin-bottom:24px; transition:color .25s ease;
+  }
+  .fit-card ul{ list-style:none; display:flex; flex-direction:column; gap:16px; }
+  .fit-card li{ display:flex; gap:13px; align-items:flex-start; font-size:15px; line-height:1.5; color:var(--text-dim); }
+  .fit-card li strong{ color:var(--text); font-weight:700; }
+  .fit-icon{
+    flex:0 0 22px; width:22px; height:22px; border-radius:50%; margin-top:1px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--surface-2); border:1px solid var(--border);
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .fit-icon svg{ width:12px; height:12px; fill:none; stroke:var(--text-faint); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; transition:stroke .25s ease; }
+
+  /* ---- default state: both cards calm and neutral ---- */
+  .fit-good h3{ color:var(--text); }
+  .fit-bad h3{ color:var(--text); }
+
+  /* ---- "This is for you" — hover: positive green glow ---- */
+  .fit-good:hover{
+    border-color:var(--fit-good);
+    box-shadow:0 0 0 1px rgba(201,162,75,.25), 0 20px 46px -22px rgba(201,162,75,.5);
+    transform:translateY(-3px);
+  }
+  .fit-good:hover h3{ color:var(--fit-good); }
+  .fit-good:hover .fit-icon{ background:var(--fit-good-soft); border-color:rgba(201,162,75,.5); }
+  .fit-good:hover .fit-icon svg{ stroke:var(--fit-good); }
+
+  /* ---- "This is not for you" — hover: dims + warning red/orange glow ---- */
+  .fit-bad:hover{
+    opacity:.9;
+    border-color:var(--fit-bad);
+    box-shadow:0 0 0 1px rgba(138,124,102,.25), 0 20px 46px -22px rgba(138,124,102,.5);
+    transform:translateY(-3px);
+  }
+  .fit-bad:hover h3{ color:var(--fit-bad); }
+  .fit-bad:hover .fit-icon{ background:var(--fit-bad-soft); border-color:rgba(138,124,102,.5); }
+  .fit-bad:hover .fit-icon svg{ stroke:var(--fit-bad); }
+
+  @media (max-width:820px){
+    .fit-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ===== APPLY WIDGET ===== */
+  #apply{ padding:88px 0; }
+  .apply-card{
+    max-width:640px; margin:0 auto;
+    border:1px solid var(--border); border-radius:4px;
+    background:linear-gradient(160deg, var(--surface), var(--bg-alt));
+    padding:44px 40px 40px;
+    position:relative; overflow:hidden;
+  }
+  .apply-progress-track{
+    height:4px; border-radius:3px; background:var(--border-soft);
+    overflow:hidden; margin-bottom:30px;
+  }
+  .apply-progress-fill{
+    height:100%; border-radius:3px;
+    background:linear-gradient(90deg, var(--teal), var(--brass));
+    width:0%; transition:width .35s ease;
+  }
+  .apply-step-tag{
+    font-family:'Inter', sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--text-faint); margin-bottom:16px; display:block;
+  }
+  .apply-question{ font-family:'Playfair Display', serif; font-weight:600; font-size:clamp(24px,3.4vw,32px); line-height:1.08; margin-bottom:8px; }
+  .apply-hint{ color:var(--text-dim); font-size:14.5px; margin-bottom:22px; }
+  .apply-body p{ color:var(--text-dim); font-size:16px; margin-bottom:14px; }
+  .apply-intro .apply-question{ font-size:clamp(28px,4vw,36px); margin-top:6px; }
+  .apply-options{ display:flex; flex-direction:column; gap:10px; margin-bottom:26px; }
+  .apply-option{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 18px; border-radius:3px; border:1px solid var(--border);
+    background:var(--surface-2); cursor:pointer; font-size:15.5px; font-weight:500;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .apply-option:hover{ border-color:var(--text-dim); }
+  .apply-option.selected{ border-color:var(--brass); background:var(--brass-soft); color:var(--brass-bright); }
+  .apply-option .check{
+    width:18px; height:18px; border-radius:50%; border:1.5px solid var(--border); flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .apply-option.selected .check{ border-color:var(--brass); background:var(--brass); }
+  .apply-option.selected .check::after{ content:""; width:7px; height:7px; border-radius:50%; background:#0d0d0d; }
+  .apply-field{ margin-bottom:26px; }
+  .apply-field-label{
+    display:block; font-family:'Inter', sans-serif; font-size:12px;
+    color:var(--text-faint); letter-spacing:.04em; margin-bottom:8px;
+  }
+  .apply-input, .apply-textarea{
+    width:100%; padding:15px 16px; border-radius:3px;
+    background:var(--surface-2); border:1px solid var(--border); color:var(--text);
+    font-family:'Inter', sans-serif; font-size:15.5px;
+  }
+  .apply-input:focus, .apply-textarea:focus{ outline:none; border-color:var(--brass); }
+  .apply-textarea{ min-height:110px; resize:vertical; font-family:inherit; }
+  .apply-field-row{ display:flex; gap:14px; }
+  .apply-field-row .apply-field{ flex:1; margin-bottom:0; }
+  .apply-phone-group{ display:flex; gap:10px; }
+  .apply-phone-group select.apply-input{
+    flex:0 0 132px; width:132px; padding-left:12px; padding-right:8px;
+    -webkit-appearance:none; appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%239aa1b0'/></svg>");
+    background-repeat:no-repeat; background-position:right 12px center;
+  }
+  .apply-phone-group input.apply-input{ flex:1; min-width:0; }
+  @media (max-width:480px){
+    .apply-field-row{ flex-direction:column; gap:26px; }
+    .apply-field-row .apply-field{ margin-bottom:0; }
+  }
+  .apply-error{ color:#e08a8a; font-size:13px; margin-top:8px; display:none; }
+  .apply-error.show{ display:block; }
+  .apply-actions{ display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .apply-back{
+    font-family:'Inter', sans-serif; font-size:13px; color:var(--text-faint);
+    cursor:pointer; background:none; border:none; padding:8px 0;
+  }
+  .apply-back:hover{ color:var(--text-dim); }
+  .apply-actions .btn{ min-width:140px; }
+  .apply-actions .btn:disabled{ opacity:.4; cursor:not-allowed; pointer-events:none; }
+  .apply-thankyou{ text-align:center; padding:8px 0; }
+  .apply-thankyou h3{ font-family:'Playfair Display', serif; font-weight:600; font-size:clamp(26px,4vw,34px); margin-bottom:14px; }
+  .apply-thankyou p{ color:var(--text-dim); font-size:16px; max-width:460px; margin:0 auto 8px; }
+  .apply-thankyou .sig{ color:var(--brass); font-family:'Inter', sans-serif; font-size:13px; margin-top:18px; letter-spacing:.06em; }
+  .apply-calendly-wrap{ margin-top:34px; text-align:left; }
+  .apply-calendly-wrap .cta-label{ font-family:'Inter', sans-serif; font-size:12.5px; color:var(--teal); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:14px; text-align:center; }
+  #calendly-embed{ min-width:280px; height:630px; border-radius:4px; overflow:hidden; border:1px solid var(--border); background:var(--surface-2); }
+  .apply-calendly-fallback{ display:block; text-align:center; margin-top:14px; font-family:'Inter', sans-serif; font-size:13px; color:var(--text-faint); }
+  .apply-calendly-fallback a{ color:var(--brass); }
+  .apply-whatsapp-wrap{ margin:6px 0 26px; }
+  .apply-whatsapp-btn{ gap:10px; width:100%; }
+  .apply-whatsapp-btn svg{ flex:0 0 auto; }
+
+  @media (max-width:820px){
+    .price-list{ grid-template-columns:1fr; }
+    .nav .btn{ display:none; }
+    .price-block{ padding:34px 22px; }
+    .price-top{ flex-direction:column; align-items:flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="logo">SCLD Agency</a>
-  <a href="https://calendly.com/scld-cons/30min" target="_blank" class="nav-btn">Book a Call</a>
-</nav>
+<header>
+  <div class="wrap nav">
+    <div class="logo">SCLD<span>.</span></div>
+    <div class="nav-right">
+      <a class="btn btn-nav-gold" href="#apply">Apply Now</a>
+    </div>
+  </div>
+</header>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="wrap">
-    <span class="eyebrow">GCC Real Estate · Done-For-You Lead System</span>
-    <h1 class="hero-h">Your agents should be<br>closing, <em>not chasing.</em></h1>
-    <p class="hero-sub">We install a complete client acquisition system into your agency. Lead generation, outbound, nurture, and qualification — all handled. You just sell.</p>
-    <div class="hero-btns">
-      <a href="#cta" class="btn-primary">Book a 20-Minute Call</a>
-      <a href="#middle" class="btn-link">See what's included →</a>
+<!-- ===== HERO ===== -->
+<section class="hero" style="border-bottom:1px solid var(--border-soft); padding-bottom:84px;">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">GCC Real Estate &amp; Construction</span>
+    <h1>Your agents should be closing — <em>not chasing.</em></h1>
+    <p class="sub">No other system in the region finds, contacts, qualifies, and books serious leads and buyers for you. SCLD does that on autopilot.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#apply" id="hero-apply-btn">Apply Now</a>
     </div>
   </div>
 </section>
-
-<!-- PROBLEM + OFFER -->
-<section id="middle">
+<!-- ===== PROBLEM ===== -->
+<section class="problem">
   <div class="wrap">
-    <div class="middle-inner">
+    <span class="eyebrow" style="color:var(--brass);">The Problem</span>
+    <h2>Inconsistent months aren't an agent problem. <br>They're a system problem.</h2>
+    <p class="tight">Your agents are posting, calling, showing up — but without infrastructure turning attention into booked appointments, results stay unpredictable.</p>
+    <p>No automated inbound. No follow-up sequence. No qualifying filter. That's not an effort gap — it's an infrastructure gap.</p>
 
-      <div class="col-problem">
-        <span class="col-label">The Problem</span>
-        <h2 class="col-h">Inconsistent months aren't an agent problem. <strong>They're a system problem.</strong></h2>
-        <p class="col-body">Your agents are posting, calling, showing up. But without a structured system converting attention into appointments, the pipeline stays unpredictable.</p>
-        <p class="col-body">No automated inbound. No follow-up sequence. No qualifying filter. Deals fall through the cracks daily.</p>
-        <div class="callout">That's not effort missing — that's infrastructure missing.</div>
+    <div class="console">
+      <div class="console-bar">
+        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <span>lead-acquisition-demo.loom</span>
       </div>
-
-      <div class="col-offer">
-        <span class="col-label">What's Included</span>
-        <div class="offer-item">
-          <div class="offer-row">
-            <span class="offer-name">The SCLD System</span>
-            <span class="offer-price">$2,000 — One Time</span>
-          </div>
-          <p class="offer-desc">Full deployment of our proprietary software — 3,000+ targeted daily interactions, DM outbound machine, and a structured nurture sequence that converts warm leads into booked appointments. Built into your agency from scratch.</p>
+      <div class="console-body">
+        <div class="play-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7-11-7z" fill="#C9A24B"/></svg>
         </div>
-        <div class="offer-item">
-          <div class="offer-row">
-            <span class="offer-name">Monthly Retainer</span>
-            <span class="offer-price">$1,000 / month</span>
+        <span class="cap">// Loom walkthrough — see the system in action</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== APPLY WIDGET ===== -->
+<section id="apply">
+  <div class="wrap">
+    <div class="apply-card" id="apply-card"><!-- rendered by JS --></div>
+  </div>
+</section>
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The System</span>
+      <h2>Four systems. One machine.</h2>
+      <p>Each one closes a gap most agencies leave open — together, they run the full journey from first touch to booked appointment.</p>
+    </div>
+    <!-- Desktop: pinned scroll-driven orbit -->
+    <div class="orbit-scroller" id="orbitScroller">
+      <div class="orbit-sticky">
+        <div class="orbit-visual">
+          <svg class="orbit-lines" viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet">
+            <circle class="orbit-ring" cx="240" cy="240" r="194"/>
+            <line class="orbit-line" data-line="0" x1="240" y1="240" x2="240" y2="46"/>
+            <line class="orbit-line" data-line="1" x1="240" y1="240" x2="434" y2="240"/>
+            <line class="orbit-line" data-line="2" x1="240" y1="240" x2="240" y2="434"/>
+            <line class="orbit-line" data-line="3" x1="240" y1="240" x2="46" y2="240"/>
+          </svg>
+
+          <div class="orbit-hub">
+            <div class="orbit-hub-ring"></div>
+            <div class="orbit-hub-ring-outer"></div>
+            <div class="orbit-hub-core">
+              <span class="hub-eyebrow">Core</span>
+              <span class="hub-label">Lead<br>Acquisition</span>
+            </div>
           </div>
-          <p class="offer-desc">A fully managed Comment-to-DM AI Agent that turns every comment on your content into a private conversation — flooding your inbox with warm, interested prospects. Zero manual effort from your team.</p>
+
+          <div class="orbit-node" data-node="0">
+            <div class="node-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+            <span class="node-num">01</span>
+          </div>
+          <div class="orbit-node" data-node="1">
+            <div class="node-dot"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <span class="node-num">02</span>
+          </div>
+          <div class="orbit-node" data-node="2">
+            <div class="node-dot"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+            <span class="node-num">03</span>
+          </div>
+          <div class="orbit-node" data-node="3">
+            <div class="node-dot"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7z"/></svg></div>
+            <span class="node-num">04</span>
+          </div>
+        </div>
+
+        <div class="orbit-panel">
+          <div class="orbit-progress">
+            <span class="orbit-progress-dot" data-dot="0"></span>
+            <span class="orbit-progress-dot" data-dot="1"></span>
+            <span class="orbit-progress-dot" data-dot="2"></span>
+            <span class="orbit-progress-dot" data-dot="3"></span>
+          </div>
+          <div class="orbit-cards">
+            <div class="orbit-card" data-card="0">
+              <span class="card-num">01</span>
+              <h3>Agent Lead Generation System</h3>
+              <p>Automated software running targeted daily interactions, pulling qualified buyer and seller leads on autopilot.</p>
+            </div>
+            <div class="orbit-card" data-card="1">
+              <span class="card-num">02</span>
+              <h3>DM Outbound System</h3>
+              <p>Captures, engages, and nurtures every new lead and follower so nothing falls through the cracks.</p>
+            </div>
+            <div class="orbit-card" data-card="2">
+              <span class="card-num">03</span>
+              <h3>Nurture &amp; Social-Proof System</h3>
+              <p>A structured follow-up sequence that keeps warm leads engaged and converts hesitant prospects into booked appointments.</p>
+            </div>
+            <div class="orbit-card" data-card="3">
+              <span class="card-num">04</span>
+              <h3>Reputation Rating System</h3>
+              <p>Continuously collects and showcases client reviews across Google and social platforms, building instant trust that shortens the buyer's decision cycle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile: simplified stacked fallback, no pinning -->
+    <div class="orbit-mobile" id="orbitMobile">
+      <div class="orbit-mobile-hub">
+        <span class="hub-eyebrow">Core</span>
+        <span class="hub-label">Lead Acquisition</span>
+      </div>
+      <div class="orbit-mobile-steps">
+        <div class="orbit-mobile-step" data-mnode="0">
+          <div class="node-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+          <div class="omstep-body">
+            <span class="card-num">01</span>
+            <h3>Agent Lead Generation System</h3>
+            <p>Automated software running targeted daily interactions, pulling qualified buyer and seller leads on autopilot.</p>
+          </div>
+        </div>
+        <div class="orbit-mobile-step" data-mnode="1">
+          <div class="node-dot"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="omstep-body">
+            <span class="card-num">02</span>
+            <h3>DM Outbound System</h3>
+            <p>Captures, engages, and nurtures every new lead and follower so nothing falls through the cracks.</p>
+          </div>
+        </div>
+        <div class="orbit-mobile-step" data-mnode="2">
+          <div class="node-dot"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <div class="omstep-body">
+            <span class="card-num">03</span>
+            <h3>Nurture &amp; Social-Proof System</h3>
+            <p>A structured follow-up sequence that keeps warm leads engaged and converts hesitant prospects into booked appointments.</p>
+          </div>
+        </div>
+        <div class="orbit-mobile-step" data-mnode="3">
+          <div class="node-dot"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8L2.2 9l6.9-.7z"/></svg></div>
+          <div class="omstep-body">
+            <span class="card-num">04</span>
+            <h3>Reputation Rating System</h3>
+            <p>Continuously collects and showcases client reviews across Google and social platforms, building instant trust that shortens the buyer's decision cycle.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== FIT CHECK ===== -->
+<section id="fit-check">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Before You Apply</span>
+      <h2>This is for you. This is not for you.</h2>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-card fit-good">
+        <h3>This is for you if</h3>
+        <ul>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>
+            <span><strong>Established Operator:</strong> You run an active real estate agency, developer, or construction firm with live listings/projects.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>
+            <span><strong>Pipeline Overflow:</strong> Inbound and outbound inquiries stack up faster than your team can manually handle.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>
+            <span><strong>Owned Infrastructure:</strong> You want a permanent $20k+ outbound system built into your business, not rented ads.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>
+            <span><strong>Done Hiring Setters:</strong> You want automated systems interacting with thousands of leads instead of capped human hours.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>
+            <span><strong>Long-Game Mindset:</strong> You know property deals take months to close and want a system to nurture serious buyers/investors.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="fit-card fit-bad">
+        <h3>This is not for you if</h3>
+        <ul>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></span>
+            <span><strong>Solo Agents:</strong> You have zero active listings, zero live projects, and zero lead flow.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></span>
+            <span><strong>Manual Traditionalists:</strong> You prefer having agents manually DM leads one by one instead of using automation.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></span>
+            <span><strong>Bargain Hunters:</strong> You are comparing a custom $20k+ infrastructure asset to a cheap $500 ad boost.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></span>
+            <span><strong>Instant Miracles:</strong> You expect overnight deals without giving a system a few weeks to compound.</span>
+          </li>
+          <li>
+            <span class="fit-icon"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></span>
+            <span><strong>No Closers:</strong> You aren't prepared to actually pick up the phone and close pre-qualified investors/buyers.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== PARTNERSHIP ===== -->
+<section id="partnership">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Day-to-Day Partnership</span>
+      <h2>How You Work With Us, Day To Day.</h2>
+    </div>
+    <div class="partnership-grid">
+      <div class="core-engine">
+        <div class="core-engine-bar">
+          <div class="core-engine-dots"><span></span><span></span><span></span></div>
+          <div class="core-engine-title">SCLD_CORE_ENGINE <span class="core-engine-status">// ACTIVE</span></div>
+          <span class="core-engine-live" aria-hidden="true"></span>
+        </div>
+        <div class="core-engine-body">
+          <div class="core-engine-stream" id="engineStream"></div>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="wrap">
-    <div class="process-top">
-      <h2 class="process-h">From signed agreement to live system — in one week.</h2>
-      <p class="process-sub">Five steps. No drawn-out onboarding. Leads followed up within minutes of going live.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <span class="step-n">01</span>
-        <div class="step-title">Secure Your Slot</div>
-        <p class="step-body">Sign the agreement. Your slot is held immediately.</p>
-      </div>
-      <div class="step">
-        <span class="step-n">02</span>
-        <div class="step-title">Deep-Dive Onboarding</div>
-        <p class="step-body">Offer, pricing, buyer profiles, objections — all documented.</p>
-      </div>
-      <div class="step">
-        <span class="step-n">03</span>
-        <div class="step-title">Strategic Kickoff</div>
-        <p class="step-body">WhatsApp group live. Custom qualification protocols finalized.</p>
-      </div>
-      <div class="step">
-        <span class="step-n">04</span>
-        <div class="step-title">Traffic Takeover</div>
-        <p class="step-body">Software configured to your exact GCC demographic. Test sequences run.</p>
-      </div>
-      <div class="step">
-        <span class="step-n">05</span>
-        <div class="step-title">We Go Live</div>
-        <p class="step-body">Machine is operational. Warm leads handed to your agents. You close.</p>
+      <div class="delivery-timeline" id="deliveryTimeline">
+        <div class="timeline-step">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          </div>
+          <div class="timeline-card">
+            <h3>Your Single Point of Contact</h3>
+            <p>One point of contact who understands your agency from day one. We keep you covered with seamless follow-through, saving you from ever starting over.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="timeline-card">
+            <h3>Direct WhatsApp Channel</h3>
+            <p>Direct access to the hands-on team means no waiting in inbox queues. Whenever you or a key lead needs anything, we step in immediately so you're never left hanging.</p>
+          </div>
+        </div>
+        <div class="timeline-step timeline-step-quote">
+          <div class="timeline-node">
+            <svg viewBox="0 0 24 24"><path d="M7 8c0-2.2 1.8-4 4-4M7 8v4a3 3 0 0 0 3 3M17 8c0-2.2 1.8-4 4-4M17 8v4a3 3 0 0 0-3 3"/></svg>
+          </div>
+          <div class="timeline-card timeline-quote">
+            <p>&ldquo;You talk directly to the people doing the work, not a system. The moment you need action, we make it happen, no delays, no runarounds.&rdquo;</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- CTA -->
-<section id="cta">
+<!-- ===== GUARANTEE ===== -->
+<section id="guarantee">
   <div class="wrap">
-    <div class="cta-inner">
-      <h2 class="cta-h">Ready to scale<br>your agency?</h2>
-      <div>
-        <p class="cta-body">Book a 20-minute call. We'll show you exactly how the SCLD System works for your market — no pitch deck, no pressure. Just a clear look at what changes when your lead generation runs on autopilot.</p>
-        <a href="https://calendly.com/scld-cons/30min" target="_blank" class="btn-large">Book Your 20-Minute Call</a>
-        <p class="cta-note">Limited slots available per month</p>
+    <div class="guarantee-card" id="guaranteeCard">
+      <div class="guarantee-aurora" aria-hidden="true"></div>
+
+      <div class="guarantee-badge" id="guaranteeBadge">
+        <svg viewBox="0 0 64 64" width="84" height="84">
+          <path class="badge-frame" d="M32 3 L58 12 V32 C58 46 47 56 32 61 C17 56 6 46 6 32 V12 Z"/>
+          <rect x="16" y="22" width="32" height="20" rx="3" fill="#3a3226"/>
+          <line x1="20" y1="37" x2="42" y2="37" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+          <path d="M42 37 l4 -2.4" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="guarantee-eyebrow-wrap"><span class="eyebrow">The SCLD Guarantee</span></div>
+      <div class="guarantee-number" id="guaranteeNumber" aria-label="20">0</div>
+      <h2 class="guarantee-headline">20 Qualified Buyer/Seller Discovery Calls in 60 Days — Guaranteed.</h2>
+      <p class="guarantee-sub">We install your custom outbound system. If we don't put 20 highly qualified buyer, investor, or seller discovery calls on your calendar within 60 days, we run the entire infrastructure at our own expense. Zero management fees until we hit your number.</p>
+
+      <div class="guarantee-seal">
+        <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="23" cy="23" r="21" stroke="var(--teal)" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6"/>
+          <circle cx="23" cy="23" r="16" stroke="var(--brass)" stroke-width="1.2" opacity="0.7"/>
+          <path d="M16 23.5 L20.5 28 L31 17" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="guarantee-seal-text">
+          <div class="seal-line1">Official Infrastructure Guarantee</div>
+          <div class="seal-line2">SCLD Consulting — Authorized Seal</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="footer-inner">
-      <span class="f-logo">SCLD Agency</span>
-      <span class="f-note">Confidential · GCC Real Estate</span>
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Straight answers.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="idx">01</span>What if the system doesn't generate leads?</span><span class="faq-plus"></span></div>
+        <div class="faq-a"><p>Then it's misconfigured for your market, and that's on us to fix. We stay in the account tuning it until it performs — this isn't a campaign we walk away from.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="idx">02</span>How is this different from a regular marketing agency?</span><span class="faq-plus"></span></div>
+        <div class="faq-a"><p>An agency sells you ads and hands you a report. We install infrastructure — outbound, nurture, and reputation running on autopilot, managed monthly. You're buying a system that stays on, not a campaign.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="idx">03</span>What's the contract length? Can I cancel?</span><span class="faq-plus"></span></div>
+        <div class="faq-a"><p>$2,000 setup is one-time, non-refundable once the build starts. The $1,000/month retainer is month-to-month after that — no lock-in. Keep it if it's working, walk if it's not.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="idx">04</span>Do I need to do anything on my end?</span><span class="faq-plus"></span></div>
+        <div class="faq-a"><p>Take the calls we book. That's it. We handle targeting, outbound, follow-up, and reputation — your agents just show up ready to close.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="idx">05</span>Will this work for Arabic-speaking leads in the GCC?</span><span class="faq-plus"></span></div>
+        <div class="faq-a"><p>Yes. The system is built and targeted specifically for the GCC real estate market — outbound and nurture are set up for your local audience, not a generic template.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span><span class="idx">06</span>Why does setup cost $2,000?</span><span class="faq-plus"></span></div>
+        <div class="faq-a"><p>That covers the full build: targeting, outbound infrastructure, nurture sequences, and reputation system — installed and tested before it touches a real lead. Infrastructure, not a template.</p></div>
+      </div>
     </div>
   </div>
-</footer>
+</section>
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center;">Ready When You Are</span>
+    <h2>Ready to scale your agency?</h2>
+    <p class="sub">Apply in 2 minutes. We'll show you exactly how the SCLD System works for your market — no pitch deck, no pressure. Just a clear look at what changes when lead generation runs on autopilot.</p>
+
+    <div class="cta-activity-card" id="ctaActivityCard">
+      <div class="cta-activity-head"><span class="cta-live-dot"></span>Live System Activity</div>
+      <div class="cta-activity-body">
+        <div class="cta-counter-row">
+          <span class="cta-counter" id="ctaCounter">0</span>
+          <span class="cta-counter-total">/ 20</span>
+        </div>
+        <div class="cta-counter-label">qualified discovery calls booked per 60-day cycle</div>
+        <div class="cta-progress-track">
+          <div class="cta-progress-fill" id="ctaProgressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <a class="btn btn-primary" href="#apply">Apply Now and Fill Your Calendar</a>
+    <div class="urgency">LIMITED SLOTS AVAILABLE PER MONTH</div>
+  </div>
+</section>
 
 <script>
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
     });
   });
+
+  // ---- Orbit system: scroll-driven activation (desktop pinned) ----
+  (function(){
+    var scroller = document.getElementById('orbitScroller');
+    if(!scroller) return;
+    var nodes = scroller.querySelectorAll('.orbit-node');
+    var lines = scroller.querySelectorAll('.orbit-line');
+    var cards = scroller.querySelectorAll('.orbit-card');
+    var dots = scroller.querySelectorAll('.orbit-progress-dot');
+    var ticking = false;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function update(){
+      ticking = false;
+      // scroller is display:none on narrow viewports (mobile fallback takes over)
+      if(scroller.offsetParent === null) return;
+
+      var rect = scroller.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var progress;
+      if(total <= 0){
+        progress = 1;
+      } else {
+        progress = -rect.top / total;
+        progress = Math.max(0, Math.min(1, progress));
+      }
+      var idx = Math.min(3, Math.floor(progress * 4));
+
+      nodes.forEach(function(n){
+        var i = +n.getAttribute('data-node');
+        n.classList.toggle('active', i <= idx);
+        n.classList.toggle('current', i === idx);
+      });
+      lines.forEach(function(l){
+        var i = +l.getAttribute('data-line');
+        l.classList.toggle('active', i <= idx);
+      });
+      cards.forEach(function(c){
+        var i = +c.getAttribute('data-card');
+        c.classList.toggle('active', i === idx);
+      });
+      dots.forEach(function(d){
+        var i = +d.getAttribute('data-dot');
+        d.classList.toggle('active', i <= idx);
+      });
+    }
+
+    function onScroll(){
+      if(ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    if(reduceMotion){
+      // show final assembled state without animating
+      nodes.forEach(function(n){ n.classList.add('active'); });
+      lines.forEach(function(l){ l.classList.add('active'); });
+      dots.forEach(function(d){ d.classList.add('active'); });
+      cards[0].classList.add('active');
+    } else {
+      window.addEventListener('scroll', onScroll, { passive:true });
+      window.addEventListener('resize', onScroll);
+      update();
+    }
+  })();
+
+  // ---- Orbit system: mobile stacked reveal (no pinning) ----
+  (function(){
+    var steps = document.querySelectorAll('.orbit-mobile-step');
+    if(!steps.length) return;
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold:0.3, rootMargin:'0px 0px -40px 0px' });
+      steps.forEach(function(s){ io.observe(s); });
+    } else {
+      steps.forEach(function(s){ s.classList.add('visible'); });
+    }
+  })();
+
+  // ---- SCLD Core Engine: rotating alert stream ----
+  (function(){
+    var stream = document.getElementById('engineStream');
+    if(!stream) return;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var ICONS = {
+      calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/>',
+      star:'<path d="M12 3l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L12 17l-5.6 3.1 1.4-6.3-4.8-4.3 6.4-.6z"/>',
+      bolt:'<path d="M13 3 4 14h6l-1 7 9-11h-6z"/>',
+      send:'<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>'
+    };
+
+    var pool = [
+      { tag:'LEAD INTERACTOR', text:'3rd high-intent property buyer of the day booked onto your calendar.', icon:'calendar' },
+      { tag:'REPUTATION SYSTEM', text:'New 5-star developer review pushed automatically to Google.', icon:'star' },
+      { tag:'SCLD SYSTEM', text:'Outbound qualification sequence initiated for new investor inquiry.', icon:'bolt' },
+      { tag:'PIPELINE ROUTER', text:'Real estate offer deck dispatched to warm prospect.', icon:'send' }
+    ];
+
+    var MAX_ITEMS = 4;
+    var idx = 0;
+
+    function timeNow(){
+      var d = new Date();
+      var h = d.getHours() % 12 || 12;
+      var m = d.getMinutes();
+      var ap = d.getHours() >= 12 ? 'PM' : 'AM';
+      return h + ':' + (m < 10 ? '0' : '') + m + ' ' + ap;
+    }
+
+    function buildItem(entry, animate){
+      var row = document.createElement('div');
+      row.className = animate ? 'stream-item new' : 'stream-item';
+      row.innerHTML =
+        '<span class="stream-icon"><svg viewBox="0 0 24 24">' + ICONS[entry.icon] + '</svg></span>' +
+        '<div>' +
+          '<div class="stream-tag">' + entry.tag + '</div>' +
+          '<div class="stream-text">' + entry.text + '</div>' +
+          '<div class="stream-time">' + timeNow() + '</div>' +
+        '</div>';
+      return row;
+    }
+
+    // seed the panel so it isn't empty on load
+    pool.forEach(function(entry){ stream.appendChild(buildItem(entry, false)); });
+    stream.scrollTop = stream.scrollHeight;
+
+    var paused = false;
+    stream.addEventListener('mouseenter', function(){ paused = true; });
+    stream.addEventListener('mouseleave', function(){ paused = false; });
+
+    function pushNext(){
+      if(paused) return;
+      var entry = pool[idx % pool.length];
+      idx++;
+      stream.appendChild(buildItem(entry, true));
+      stream.scrollTop = stream.scrollHeight;
+      while(stream.children.length > MAX_ITEMS){
+        stream.removeChild(stream.firstChild);
+      }
+    }
+
+    if(!reduceMotion){
+      setInterval(pushNext, 3800);
+    }
+  })();
+
+  // ---- Delivery timeline: active-state hover listener ----
+  (function(){
+    var steps = document.querySelectorAll('#deliveryTimeline .timeline-step');
+    if(!steps.length) return;
+    steps.forEach(function(step){
+      step.addEventListener('mouseenter', function(){
+        steps.forEach(function(s){ s.classList.remove('active'); });
+        step.classList.add('active');
+      });
+      step.addEventListener('mouseleave', function(){
+        step.classList.remove('active');
+      });
+    });
+  })();
+
+  // ---- Final CTA: guarantee-progress counter (fires once on scroll into view) ----
+  (function(){
+    var card = document.getElementById('ctaActivityCard');
+    var counterEl = document.getElementById('ctaCounter');
+    var fillEl = document.getElementById('ctaProgressFill');
+    if(!card || !counterEl) return;
+
+    var target = 20;
+    var animated = false;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setValue(v){
+      counterEl.textContent = v;
+      if(fillEl) fillEl.style.width = Math.round((v / target) * 100) + '%';
+    }
+
+    function animateCount(){
+      if(animated) return;
+      animated = true;
+      if(reduceMotion){ setValue(target); return; }
+      var duration = 1600;
+      var start = null;
+      function step(ts){
+        if(start === null) start = ts;
+        var progress = Math.min(1, (ts - start) / duration);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        setValue(Math.round(eased * target));
+        if(progress < 1) window.requestAnimationFrame(step);
+        else setValue(target);
+      }
+      window.requestAnimationFrame(step);
+    }
+
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            animateCount();
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold:0.4 });
+      io.observe(card);
+    } else {
+      animateCount();
+    }
+  })();
+
+  // ---- Live system activity widget ----
+  // (removed — the "The System, Live" section was deleted)
+
+  // ---- Guarantee card: count-up + 3D badge tilt ----
+  (function(){
+    var card = document.getElementById('guaranteeCard');
+    var badge = document.getElementById('guaranteeBadge');
+    var numberEl = document.getElementById('guaranteeNumber');
+    if(!card || !numberEl) return;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var target = 20;
+    var counted = false;
+
+    function setValue(v){ numberEl.textContent = v; }
+
+    function animateCount(){
+      if(counted) return;
+      counted = true;
+      if(reduceMotion){ setValue(target); return; }
+      var duration = 1400;
+      var start = null;
+      function step(ts){
+        if(start === null) start = ts;
+        var progress = Math.min(1, (ts - start) / duration);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        setValue(Math.round(eased * target));
+        if(progress < 1) window.requestAnimationFrame(step);
+        else setValue(target);
+      }
+      window.requestAnimationFrame(step);
+    }
+
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            animateCount();
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold:0.4 });
+      io.observe(card);
+    } else {
+      animateCount();
+    }
+
+    // 3D tilt on the shield, pointer (mouse/trackpad) devices only
+    if(badge && !reduceMotion && window.matchMedia('(pointer:fine)').matches){
+      var bounds = null;
+      card.addEventListener('mouseenter', function(){
+        bounds = card.getBoundingClientRect();
+      });
+      card.addEventListener('mousemove', function(e){
+        if(!bounds) bounds = card.getBoundingClientRect();
+        var relX = (e.clientX - bounds.left) / bounds.width;
+        var relY = (e.clientY - bounds.top) / bounds.height;
+        var rotateY = (relX - 0.5) * 24;
+        var rotateX = (0.5 - relY) * 24;
+        badge.style.transform = 'perspective(600px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+      });
+      card.addEventListener('mouseleave', function(){
+        badge.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg)';
+      });
+    }
+  })();
 </script>
+
+<script>
+  // ==========================================================
+  // Native multi-step qualification widget (replaces Tally form)
+  // ==========================================================
+  (function(){
+    var card = document.getElementById('apply-card');
+    if(!card) return;
+
+    // ---- state ----
+    var answers = {
+      activeSales: null,       // true/false — Q1
+      agentCount: null,        // '1' / '2-5' / '5+'
+      listingChannel: null,    // string
+      bottleneck: null,        // string
+      revenueRange: null,      // string
+      decisionMaker: null,     // string
+      revenueGoal: null,       // string
+      budget: null,            // string
+      firstName: '',
+      lastName: '',
+      businessEmail: '',
+      mobileCountry: '',       // e.g. 'SA'
+      mobileDialCode: '',      // e.g. '+966'
+      mobileNumber: ''
+    };
+
+    var GCC_COUNTRIES = [
+      { code:'SA', dial:'+966', flag:'\uD83C\uDDF8\uD83C\uDDE6', name:'Saudi Arabia' },
+      { code:'AE', dial:'+971', flag:'\uD83C\uDDE6\uD83C\uDDEA', name:'UAE' },
+      { code:'QA', dial:'+974', flag:'\uD83C\uDDF6\uD83C\uDDE6', name:'Qatar' },
+      { code:'KW', dial:'+965', flag:'\uD83C\uDDF0\uD83C\uDDFC', name:'Kuwait' },
+      { code:'BH', dial:'+973', flag:'\uD83C\uDDE7\uD83C\uDDED', name:'Bahrain' },
+      { code:'OM', dial:'+968', flag:'\uD83C\uDDF4\uD83C\uDDF2', name:'Oman' }
+    ];
+
+    function detectGCCCountryCode(){
+      try{
+        var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+        if(tz.indexOf('Riyadh') !== -1) return 'SA';
+        if(tz.indexOf('Qatar') !== -1) return 'QA';
+        if(tz.indexOf('Dubai') !== -1) return 'AE';
+        if(tz.indexOf('Kuwait') !== -1) return 'KW';
+        if(tz.indexOf('Bahrain') !== -1) return 'BH';
+        if(tz.indexOf('Muscat') !== -1) return 'OM';
+      }catch(e){}
+      return 'SA'; // default to primary market
+    }
+
+    var TOTAL_STEPS = 9; // main questions, excludes intro + thank-you + down-sell branch
+    var progressMap = {
+      activeSales: 1, agentCount: 2, listingChannel: 3, bottleneck: 4,
+      revenueRange: 5, decisionMaker: 6,
+      revenueGoal: 7, budget: 8, contact: 9
+    };
+
+    var history = ['intro'];
+
+    function currentStep(){ return history[history.length - 1]; }
+
+    function goTo(stepId){
+      history.push(stepId);
+      render();
+    }
+
+    function goBack(){
+      if(history.length > 1){
+        history.pop();
+        render();
+      }
+    }
+
+    // ---- branching logic ----
+    function nextStepFrom(stepId){
+      switch(stepId){
+        case 'intro': return 'activeSales';
+        case 'activeSales': return answers.activeSales ? 'agentCount' : 'softDownsell';
+        case 'agentCount': return 'listingChannel';
+        case 'listingChannel': return 'bottleneck';
+        case 'bottleneck': return 'revenueRange';
+        case 'revenueRange': return 'decisionMaker';
+        case 'decisionMaker': return 'revenueGoal';
+        case 'revenueGoal': return 'budget';
+        case 'budget': return 'contact';
+        case 'contact': return 'thankyou';
+        default: return 'thankyou';
+      }
+    }
+
+    function isQualified(){
+      // Qualified = has a real closing process already. Revenue is inherently
+      // $10k+/mo since every revenueRange option starts at that floor.
+      return answers.activeSales === true;
+    }
+
+    // ---- submission (record delivery method: NOT YET DECIDED — see note below) ----
+    function buildPayload(){
+      return {
+        qualified: isQualified(),
+        activeSales: answers.activeSales,
+        agentCount: answers.agentCount,
+        listingChannel: answers.listingChannel,
+        bottleneck: answers.bottleneck,
+        revenueRange: answers.revenueRange,
+        decisionMaker: answers.decisionMaker,
+        revenueGoal: answers.revenueGoal,
+        budget: answers.budget,
+        firstName: answers.firstName,
+        lastName: answers.lastName,
+        fullName: (answers.firstName + ' ' + answers.lastName).trim(),
+        businessEmail: answers.businessEmail,
+        mobileCountry: answers.mobileCountry,
+        mobile: answers.mobileDialCode + ' ' + answers.mobileNumber,
+        submittedAt: new Date().toISOString()
+      };
+    }
+
+    function submitApplication(){
+      var payload = buildPayload();
+      // ------------------------------------------------------------------
+      // TODO — RECORD DELIVERY METHOD NOT YET DECIDED.
+      // Every completed application must reach Hussain with the full set
+      // of submitted answers. Candidate methods: email, webhook, Google
+      // Sheet, or CRM (e.g. GHL). Do not silently pick one — confirm with
+      // Hussain, then replace this block with the real send (fetch() POST
+      // to a webhook, a backend-triggered email, or a Sheets API call).
+      // ------------------------------------------------------------------
+      window.__scldApplicationData = payload;
+      console.log('SCLD Application submitted (delivery method TBD):', payload);
+    }
+
+    var softLeadLogged = false;
+    function submitSoftLead(){
+      if(softLeadLogged) return;
+      softLeadLogged = true;
+      var payload = {
+        type: 'soft-decline',
+        activeSales: answers.activeSales,
+        reachedAt: new Date().toISOString()
+      };
+      // Same TBD delivery note applies — worth tracking that this
+      // applicant was soft-declined, once the method is decided.
+      window.__scldSoftLeadData = payload;
+      console.log('SCLD soft-decline reached (delivery method TBD):', payload);
+    }
+
+    // ---- helpers ----
+    function el(html){
+      var t = document.createElement('template');
+      t.innerHTML = html.trim();
+      return t.content.firstElementChild;
+    }
+
+    function progressBar(stepId){
+      var pct = 0;
+      if(progressMap[stepId]) pct = Math.round((progressMap[stepId] / TOTAL_STEPS) * 100);
+      if(stepId === 'thankyou') pct = 100;
+      return '<div class="apply-progress-track"><div class="apply-progress-fill" style="width:' + pct + '%"></div></div>';
+    }
+
+    function stepTag(stepId){
+      if(!progressMap[stepId]) return '';
+      return '<span class="apply-step-tag">Step ' + progressMap[stepId] + ' of ' + TOTAL_STEPS + '</span>';
+    }
+
+    // ---- render ----
+    function render(){
+      var stepId = currentStep();
+      card.innerHTML = '';
+
+      var noProgress = (stepId === 'intro' || stepId === 'thankyou' || stepId === 'softDownsell');
+      if(!noProgress){
+        card.appendChild(el(progressBar(stepId)));
+      }
+
+      var body = document.createElement('div');
+      body.className = 'apply-body';
+
+      if(stepId === 'intro') renderIntro(body);
+      else if(stepId === 'activeSales') renderChoice(body, stepId,
+        'Do you currently have an active sales process or offer that regularly closes clients?',
+        [
+          ['Yes', true],
+          ['No, we are still figuring out our offer / closing our first few deals', false]
+        ], 'activeSales');
+      else if(stepId === 'agentCount') renderChoice(body, stepId,
+        'How many agents are currently on your team?',
+        [['1','1'], ['2-5','2-5'], ['5+','5+']], 'agentCount');
+      else if(stepId === 'listingChannel') renderChoice(body, stepId,
+        'What is your primary channel for getting new property listings right now?',
+        [['Referrals','Referrals'], ['Cold Outreach','Cold Outreach'], ['Paid Ads','Paid Ads'], ['Word of Mouth','Word of Mouth']], 'listingChannel');
+      else if(stepId === 'bottleneck') renderChoice(body, stepId,
+        'What is the biggest bottleneck holding your agency back?',
+        [['Lead volume','Lead volume'], ['Follow-up / Nurture','Follow-up-Nurture'], ['Closing deals','Closing deals']], 'bottleneck');
+      else if(stepId === 'revenueRange') renderChoice(body, stepId,
+        'What is your monthly revenue range?',
+        [['$10k–$25k','$10k–$25k'], ['$25k–$50k','$25k–$50k'], ['$50k–$100k','$50k–$100k'], ['$100k+','$100k+']], 'revenueRange');
+      else if(stepId === 'decisionMaker') renderChoice(body, stepId,
+        "Who is responsible for making strategic decisions for your agency's growth?",
+        [
+          ["It's just me (I am the sole decision-maker)", "It's just me (I am the sole decision-maker)"],
+          ["I have a business partner / co-founder (we make decisions together)", "I have a business partner / co-founder (we make decisions together)"],
+          ["We have a leadership / board team", "We have a leadership / board team"]
+        ], 'decisionMaker');
+      else if(stepId === 'revenueGoal') renderChoice(body, stepId,
+        'What is your target monthly revenue goal for the next 12 months?',
+        [
+          ['$30,000 to $50,000/month (Setting the floor)', '$30,000 to $50,000/month (Setting the floor)'],
+          ['$50,000 to $100,000/month (Mid-tier scaling)', '$50,000 to $100,000/month (Mid-tier scaling)'],
+          ['$100,000+/month (Enterprise / High-growth)', '$100,000+/month (Enterprise / High-growth)'],
+          ['We are already doing $100k+/mo and want to optimize/automate our systems', 'We are already doing $100k+/mo and want to optimize/automate our systems']
+        ], 'revenueGoal');
+      else if(stepId === 'budget') renderChoice(body, stepId,
+        'Growth requires investment. We charge an upfront build fee + a performance fee on results. What is your current budget to scale your sales systems?',
+        [
+          ['Aggressive Scale ($5k+): I value speed. Build the system for me so I can close deals.', 'Aggressive Scale ($5k+): I value speed. Build the system for me so I can close deals.'],
+          ['Steady Growth ($3k-$5k): I want to scale but need to move step-by-step.', 'Steady Growth ($3k-$5k): I want to scale but need to move step-by-step.'],
+          ['Slow Pace (Under $3k): I have more time than money right now.', 'Slow Pace (Under $3k): I have more time than money right now.'],
+          ['No Budget ($0): I am looking for a partner to build this for free / commission-only.', 'No Budget ($0): I am looking for a partner to build this for free / commission-only.']
+        ], 'budget');
+      else if(stepId === 'contact') renderContact(body);
+      else if(stepId === 'softDownsell') renderSoftDownsell(body);
+      else if(stepId === 'thankyou') renderThankYou(body);
+
+      card.appendChild(body);
+    }
+
+    function renderIntro(body){
+      var wrap = el('<div class="apply-intro"></div>');
+      wrap.innerHTML =
+        '<span class="apply-step-tag">Application</span>' +
+        '<div class="apply-question">Welcome! Thank you for reaching out to SCLD.</div>' +
+        '<p>At SCLD Consulting, we build and run done-for-you sales systems for early-stage real estate and construction. From first interaction to finally booked serious buyers — we handle it all, so your revenue grows without adding to your workload.</p>' +
+        '<div class="apply-actions" style="justify-content:flex-end;"><button class="btn btn-primary" id="apply-next">Next</button></div>';
+      body.appendChild(wrap);
+      body.querySelector('#apply-next').addEventListener('click', function(){
+        goTo(nextStepFrom('intro'));
+      });
+    }
+
+    function renderChoice(body, stepId, question, options, field){
+      var frag = document.createElement('div');
+      frag.innerHTML = stepTag(stepId) + '<div class="apply-question">' + question + '</div>';
+      var optWrap = document.createElement('div');
+      optWrap.className = 'apply-options';
+
+      options.forEach(function(opt){
+        var label = opt[0], value = opt[1];
+        var isSelected = answers[field] === value;
+        var optEl = el('<div class="apply-option' + (isSelected ? ' selected' : '') + '"><span>' + label + '</span><span class="check"></span></div>');
+        optEl.addEventListener('click', function(){
+          answers[field] = value;
+          render();
+        });
+        optWrap.appendChild(optEl);
+      });
+      frag.appendChild(optWrap);
+
+      var actions = buildActions(stepId, answers[field] !== null && answers[field] !== undefined, function(){
+        goTo(nextStepFrom(stepId));
+      });
+      frag.appendChild(actions);
+      body.appendChild(frag);
+    }
+
+    var PERSONAL_EMAIL_DOMAINS = [
+      'gmail.com','yahoo.com','hotmail.com','outlook.com','icloud.com',
+      'aol.com','live.com','msn.com','protonmail.com','yandex.com'
+    ];
+
+    function isValidEmailFormat(v){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || '').trim());
+    }
+
+    function isBusinessEmail(v){
+      v = (v || '').trim();
+      if(!isValidEmailFormat(v)) return false;
+      var domain = v.split('@')[1].toLowerCase();
+      return PERSONAL_EMAIL_DOMAINS.indexOf(domain) === -1;
+    }
+
+    function renderContact(body){
+      var stepId = 'contact';
+      var frag = document.createElement('div');
+      frag.innerHTML = stepTag(stepId) +
+        '<div class="apply-question">Where should we send your custom scaling plan?</div>' +
+        '<p class="apply-hint">Please provide your direct contact details so our strategy team can review your application and reach out if you\u2019re fit.</p>';
+
+      // ---- name (first + last, side by side) ----
+      var nameRow = document.createElement('div');
+      nameRow.className = 'apply-field-row';
+
+      var firstWrap = document.createElement('div');
+      firstWrap.className = 'apply-field';
+      firstWrap.appendChild(el('<label class="apply-field-label">First Name</label>'));
+      var firstInput = document.createElement('input');
+      firstInput.className = 'apply-input';
+      firstInput.type = 'text';
+      firstInput.placeholder = 'First name';
+      firstInput.value = answers.firstName || '';
+      firstWrap.appendChild(firstInput);
+      var firstError = el('<div class="apply-error">Please enter your first name.</div>');
+      firstWrap.appendChild(firstError);
+      nameRow.appendChild(firstWrap);
+
+      var lastWrap = document.createElement('div');
+      lastWrap.className = 'apply-field';
+      lastWrap.appendChild(el('<label class="apply-field-label">Last Name</label>'));
+      var lastInput = document.createElement('input');
+      lastInput.className = 'apply-input';
+      lastInput.type = 'text';
+      lastInput.placeholder = 'Last name';
+      lastInput.value = answers.lastName || '';
+      lastWrap.appendChild(lastInput);
+      var lastError = el('<div class="apply-error">Please enter your last name.</div>');
+      lastWrap.appendChild(lastError);
+      nameRow.appendChild(lastWrap);
+
+      frag.appendChild(nameRow);
+
+      // spacer to match .apply-field bottom margin, since the row itself has margin-bottom:0
+      var nameRowSpacer = el('<div style="height:26px;"></div>');
+      frag.appendChild(nameRowSpacer);
+
+      var emailWrap = document.createElement('div');
+      emailWrap.className = 'apply-field';
+      emailWrap.appendChild(el('<label class="apply-field-label">Business Email</label>'));
+      var emailInput = document.createElement('input');
+      emailInput.className = 'apply-input';
+      emailInput.type = 'email';
+      emailInput.placeholder = 'you@youragency.com';
+      emailInput.value = answers.businessEmail || '';
+      emailWrap.appendChild(emailInput);
+      var emailError = el('<div class="apply-error">Please use a business email — not a personal Gmail/Yahoo/etc. address.</div>');
+      emailWrap.appendChild(emailError);
+      frag.appendChild(emailWrap);
+
+      // ---- mobile: GCC country select + local number ----
+      var mobileWrap = document.createElement('div');
+      mobileWrap.className = 'apply-field';
+      mobileWrap.appendChild(el('<label class="apply-field-label">Mobile Number (for direct WhatsApp follow-ups)</label>'));
+
+      var phoneGroup = document.createElement('div');
+      phoneGroup.className = 'apply-phone-group';
+
+      var countrySelect = document.createElement('select');
+      countrySelect.className = 'apply-input';
+      GCC_COUNTRIES.forEach(function(c){
+        var opt = document.createElement('option');
+        opt.value = c.code;
+        opt.textContent = c.flag + ' ' + c.dial;
+        countrySelect.appendChild(opt);
+      });
+      var initialCode = answers.mobileCountry || detectGCCCountryCode();
+      countrySelect.value = initialCode;
+
+      var mobileInput = document.createElement('input');
+      mobileInput.className = 'apply-input';
+      mobileInput.type = 'tel';
+      mobileInput.placeholder = '5X XXX XXXX';
+      mobileInput.value = answers.mobileNumber || '';
+
+      phoneGroup.appendChild(countrySelect);
+      phoneGroup.appendChild(mobileInput);
+      mobileWrap.appendChild(phoneGroup);
+      var mobileError = el('<div class="apply-error">Please enter a valid mobile number.</div>');
+      mobileWrap.appendChild(mobileError);
+      frag.appendChild(mobileWrap);
+
+      function isValidName(v){ return !!(v && v.trim().length > 1); }
+      function isValidMobile(v){ return !!(v && v.replace(/\D/g,'').length >= 7); }
+
+      function allValid(){
+        return isValidName(firstInput.value) && isValidName(lastInput.value) &&
+          isBusinessEmail(emailInput.value) && isValidMobile(mobileInput.value);
+      }
+
+      var actions = buildActions(stepId, allValid(), function(){
+        var ok = true;
+        if(!isValidName(firstInput.value)){ firstError.classList.add('show'); ok = false; }
+        if(!isValidName(lastInput.value)){ lastError.classList.add('show'); ok = false; }
+        if(!isBusinessEmail(emailInput.value)){ emailError.classList.add('show'); ok = false; }
+        if(!isValidMobile(mobileInput.value)){ mobileError.classList.add('show'); ok = false; }
+        if(!ok) return;
+        answers.firstName = firstInput.value.trim();
+        answers.lastName = lastInput.value.trim();
+        answers.businessEmail = emailInput.value.trim();
+        var selectedCountry = GCC_COUNTRIES.filter(function(c){ return c.code === countrySelect.value; })[0];
+        answers.mobileCountry = countrySelect.value;
+        answers.mobileDialCode = selectedCountry ? selectedCountry.dial : '';
+        answers.mobileNumber = mobileInput.value.trim();
+        submitApplication();
+        goTo(nextStepFrom(stepId));
+      }, 'Submit Application');
+      frag.appendChild(actions);
+      body.appendChild(frag);
+
+      [firstInput, lastInput, emailInput, mobileInput].forEach(function(inp){
+        inp.addEventListener('input', function(){
+          firstError.classList.remove('show');
+          lastError.classList.remove('show');
+          emailError.classList.remove('show');
+          mobileError.classList.remove('show');
+          var btn = frag.querySelector('#apply-next');
+          if(btn) btn.disabled = !allValid();
+        });
+      });
+      firstInput.focus();
+    }
+
+    function renderSoftDownsell(body){
+      var frag = document.createElement('div');
+      frag.innerHTML =
+        '<div class="apply-question">Not Quite a Fit — For Now.</div>' +
+        '<p>Based on your answers, our services might not be the best fit for you right now. However, if you have any questions or would like to double-check, please message us on WhatsApp, and we will get back to you as soon as possible:</p>';
+
+      var waWrap = document.createElement('div');
+      waWrap.className = 'apply-whatsapp-wrap';
+      waWrap.appendChild(el(
+        '<a class="btn btn-primary apply-whatsapp-btn" href="https://wa.me/97366685125" target="_blank" rel="noopener">' +
+          '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.33 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.33-1.93 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.95-.31-1.64-.6-2.87-1.24-4.75-4.14-4.9-4.33-.14-.2-1.17-1.56-1.17-2.98s.73-2.11 1-2.4c.24-.27.53-.34.7-.34h.5c.16 0 .38-.03.58.44.24.57.8 1.98.87 2.13.07.14.12.32.02.51-.1.2-.15.32-.3.49-.14.17-.3.38-.43.5-.14.14-.29.29-.13.57.17.28.75 1.24 1.61 2 1.11.99 2.03 1.29 2.32 1.44.29.14.46.12.62-.07.17-.2.71-.83.9-1.11.19-.28.38-.24.63-.14.26.1 1.65.78 1.94.92.29.14.48.21.55.33.07.12.07.68-.17 1.35z"/></svg>' +
+          '<span>Message us on WhatsApp — +973 6668 5125</span>' +
+        '</a>'
+      ));
+      frag.appendChild(waWrap);
+
+      var actions = document.createElement('div');
+      actions.className = 'apply-actions';
+      var back = el('<button class="apply-back">&larr; Back</button>');
+      back.addEventListener('click', goBack);
+      actions.appendChild(back);
+      actions.appendChild(el('<span></span>'));
+      frag.appendChild(actions);
+
+      body.appendChild(frag);
+      submitSoftLead();
+    }
+
+    function buildActions(stepId, enabled, onNext, label){
+      var showBack = history.length > 1 && currentStep() !== 'intro';
+      var wrap = el('<div class="apply-actions"></div>');
+      if(showBack){
+        var back = el('<button class="apply-back">&larr; Back</button>');
+        back.addEventListener('click', goBack);
+        wrap.appendChild(back);
+      } else {
+        wrap.appendChild(el('<span></span>'));
+      }
+      var btn = el('<button class="btn btn-primary" id="apply-next">' + (label || 'Continue') + '</button>');
+      btn.disabled = !enabled;
+      btn.addEventListener('click', onNext);
+      wrap.appendChild(btn);
+      return wrap;
+    }
+
+    function renderThankYou(body){
+      var qualified = isQualified();
+      var wrap = el('<div class="apply-thankyou"></div>');
+      var html =
+        '<h3>Thank you, Application Received.</h3>' +
+        '<p>We\'ve received your application and will be in touch shortly. Keep an eye on your Messages.</p>' +
+        '<div class="sig">SCLD Consulting</div>';
+
+      if(qualified){
+        html +=
+          '<div class="apply-calendly-wrap">' +
+            '<span class="cta-label">Ready now? Book your 20-minute call directly:</span>' +
+            '<div id="calendly-embed"></div>' +
+            '<span class="apply-calendly-fallback">Widget not loading? <a href="https://calendly.com/scld-cons/30min" target="_blank" rel="noopener">Open the booking page &rarr;</a></span>' +
+          '</div>';
+      }
+      wrap.innerHTML = html;
+      body.appendChild(wrap);
+
+      if(qualified) mountCalendly();
+    }
+
+    function mountCalendly(){
+      var container = document.getElementById('calendly-embed');
+      if(!container) return;
+      function tryInit(){
+        if(window.Calendly && window.Calendly.initInlineWidget){
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/scld-cons/30min',
+            parentElement: container,
+            prefill: answers.businessEmail ? { email: answers.businessEmail, name: (answers.firstName + ' ' + answers.lastName).trim() } : {}
+          });
+          return true;
+        }
+        return false;
+      }
+      if(!tryInit()){
+        var attempts = 0;
+        var iv = setInterval(function(){
+          attempts++;
+          if(tryInit() || attempts > 20) clearInterval(iv);
+        }, 300);
+      }
+    }
+
+    // ---- entry point: smooth-scroll from hero "Apply Now" ----
+    var heroBtn = document.getElementById('hero-apply-btn');
+    if(heroBtn){
+      heroBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        document.getElementById('apply').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    render();
+  })();
+</script>
+
 </body>
 </html>
+

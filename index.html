@@ -345,6 +345,20 @@
     .orbit-scroller{ display:none; }
     .orbit-mobile{ display:block; }
   }
+  /* short viewports (e.g. 13" laptops) — pinning feels stuck, use the stacked fallback instead */
+  @media (max-height:749px){
+    .orbit-scroller{ display:none; }
+    .orbit-mobile{ display:block; }
+  }
+
+  .services-cta{ margin-top:48px; text-align:center; }
+  .services-cta-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Inter', sans-serif; font-weight:400; font-size:14.5px;
+    color:var(--text-dim); border-bottom:1px solid var(--border);
+    padding-bottom:3px; transition:color .2s ease, border-color .2s ease;
+  }
+  .services-cta-link:hover{ color:var(--brass); border-color:var(--brass); }
 
   /* ===== PARTNERSHIP ===== */
   #partnership{ --neon:#C9A24B; --neon-soft:rgba(201,162,75,.14); }
@@ -834,19 +848,6 @@
     <h2>Inconsistent months aren't an agent problem. <br>They're a system problem.</h2>
     <p class="tight">Your agents are posting, calling, showing up — but without infrastructure turning attention into booked appointments, results stay unpredictable.</p>
     <p>No automated inbound. No follow-up sequence. No qualifying filter. That's not an effort gap — it's an infrastructure gap.</p>
-
-    <div class="console">
-      <div class="console-bar">
-        <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-        <span>lead-acquisition-demo.loom</span>
-      </div>
-      <div class="console-body">
-        <div class="play-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7-11-7z" fill="#C9A24B"/></svg>
-        </div>
-        <span class="cap">// Loom walkthrough — see the system in action</span>
-      </div>
-    </div>
   </div>
 </section>
 <!-- ===== APPLY WIDGET ===== -->
@@ -975,6 +976,10 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="services-cta">
+      <a class="services-cta-link" href="#apply">See if your agency qualifies to install this system &rarr;</a>
     </div>
   </div>
 </section>
@@ -1119,41 +1124,6 @@
           <div class="seal-line1">Official Infrastructure Guarantee</div>
           <div class="seal-line2">SCLD Consulting — Authorized Seal</div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ===== FAQ ===== -->
-<section id="faq">
-  <div class="wrap" style="max-width:760px;">
-    <div class="section-head">
-      <span class="eyebrow">FAQ</span>
-      <h2>Straight answers.</h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q"><span><span class="idx">01</span>What if the system doesn't generate leads?</span><span class="faq-plus"></span></div>
-        <div class="faq-a"><p>Then it's misconfigured for your market, and that's on us to fix. We stay in the account tuning it until it performs — this isn't a campaign we walk away from.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span><span class="idx">02</span>How is this different from a regular marketing agency?</span><span class="faq-plus"></span></div>
-        <div class="faq-a"><p>An agency sells you ads and hands you a report. We install infrastructure — outbound, nurture, and reputation running on autopilot, managed monthly. You're buying a system that stays on, not a campaign.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span><span class="idx">03</span>What's the contract length? Can I cancel?</span><span class="faq-plus"></span></div>
-        <div class="faq-a"><p>$2,000 setup is one-time, non-refundable once the build starts. The $1,000/month retainer is month-to-month after that — no lock-in. Keep it if it's working, walk if it's not.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span><span class="idx">04</span>Do I need to do anything on my end?</span><span class="faq-plus"></span></div>
-        <div class="faq-a"><p>Take the calls we book. That's it. We handle targeting, outbound, follow-up, and reputation — your agents just show up ready to close.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span><span class="idx">05</span>Will this work for Arabic-speaking leads in the GCC?</span><span class="faq-plus"></span></div>
-        <div class="faq-a"><p>Yes. The system is built and targeted specifically for the GCC real estate market — outbound and nurture are set up for your local audience, not a generic template.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span><span class="idx">06</span>Why does setup cost $2,000?</span><span class="faq-plus"></span></div>
-        <div class="faq-a"><p>That covers the full build: targeting, outbound infrastructure, nurture sequences, and reputation system — installed and tested before it touches a real lead. Infrastructure, not a template.</p></div>
       </div>
     </div>
   </div>
@@ -1484,20 +1454,18 @@
 
     // ---- state ----
     var answers = {
-      activeSales: null,       // true/false — Q1
-      agentCount: null,        // '1' / '2-5' / '5+'
-      listingChannel: null,    // string
-      bottleneck: null,        // string
+      activeSales: null,       // true/false — Q1 (revenue filter)
       revenueRange: null,      // string
-      decisionMaker: null,     // string
-      revenueGoal: null,       // string
-      budget: null,            // string
       firstName: '',
       lastName: '',
       businessEmail: '',
       mobileCountry: '',       // e.g. 'SA'
       mobileDialCode: '',      // e.g. '+966'
-      mobileNumber: ''
+      mobileNumber: '',
+      instagramHandle: '',     // string
+      website: '',             // string
+      priorAgency: null,       // true/false
+      biggestChallenge: ''     // string
     };
 
     var GCC_COUNTRIES = [
@@ -1522,11 +1490,10 @@
       return 'SA'; // default to primary market
     }
 
-    var TOTAL_STEPS = 9; // main questions, excludes intro + thank-you + down-sell branch
+    var TOTAL_STEPS = 7; // main questions, excludes intro + thank-you + down-sell branch
     var progressMap = {
-      activeSales: 1, agentCount: 2, listingChannel: 3, bottleneck: 4,
-      revenueRange: 5, decisionMaker: 6,
-      revenueGoal: 7, budget: 8, contact: 9
+      activeSales: 1, revenueRange: 2, contact: 3,
+      instagram: 4, website: 5, priorAgency: 6, biggestChallenge: 7
     };
 
     var history = ['intro'];
@@ -1549,15 +1516,13 @@
     function nextStepFrom(stepId){
       switch(stepId){
         case 'intro': return 'activeSales';
-        case 'activeSales': return answers.activeSales ? 'agentCount' : 'softDownsell';
-        case 'agentCount': return 'listingChannel';
-        case 'listingChannel': return 'bottleneck';
-        case 'bottleneck': return 'revenueRange';
-        case 'revenueRange': return 'decisionMaker';
-        case 'decisionMaker': return 'revenueGoal';
-        case 'revenueGoal': return 'budget';
-        case 'budget': return 'contact';
-        case 'contact': return 'thankyou';
+        case 'activeSales': return answers.activeSales ? 'revenueRange' : 'softDownsell';
+        case 'revenueRange': return 'contact';
+        case 'contact': return 'instagram';
+        case 'instagram': return 'website';
+        case 'website': return 'priorAgency';
+        case 'priorAgency': return 'biggestChallenge';
+        case 'biggestChallenge': return 'thankyou';
         default: return 'thankyou';
       }
     }
@@ -1573,19 +1538,17 @@
       return {
         qualified: isQualified(),
         activeSales: answers.activeSales,
-        agentCount: answers.agentCount,
-        listingChannel: answers.listingChannel,
-        bottleneck: answers.bottleneck,
         revenueRange: answers.revenueRange,
-        decisionMaker: answers.decisionMaker,
-        revenueGoal: answers.revenueGoal,
-        budget: answers.budget,
         firstName: answers.firstName,
         lastName: answers.lastName,
         fullName: (answers.firstName + ' ' + answers.lastName).trim(),
         businessEmail: answers.businessEmail,
         mobileCountry: answers.mobileCountry,
         mobile: answers.mobileDialCode + ' ' + answers.mobileNumber,
+        instagramHandle: answers.instagramHandle,
+        website: answers.website,
+        priorAgency: answers.priorAgency,
+        biggestChallenge: answers.biggestChallenge,
         submittedAt: new Date().toISOString()
       };
     }
@@ -1658,42 +1621,36 @@
           ['Yes', true],
           ['No, we are still figuring out our offer / closing our first few deals', false]
         ], 'activeSales');
-      else if(stepId === 'agentCount') renderChoice(body, stepId,
-        'How many agents are currently on your team?',
-        [['1','1'], ['2-5','2-5'], ['5+','5+']], 'agentCount');
-      else if(stepId === 'listingChannel') renderChoice(body, stepId,
-        'What is your primary channel for getting new property listings right now?',
-        [['Referrals','Referrals'], ['Cold Outreach','Cold Outreach'], ['Paid Ads','Paid Ads'], ['Word of Mouth','Word of Mouth']], 'listingChannel');
-      else if(stepId === 'bottleneck') renderChoice(body, stepId,
-        'What is the biggest bottleneck holding your agency back?',
-        [['Lead volume','Lead volume'], ['Follow-up / Nurture','Follow-up-Nurture'], ['Closing deals','Closing deals']], 'bottleneck');
       else if(stepId === 'revenueRange') renderChoice(body, stepId,
         'What is your monthly revenue range?',
         [['$10k–$25k','$10k–$25k'], ['$25k–$50k','$25k–$50k'], ['$50k–$100k','$50k–$100k'], ['$100k+','$100k+']], 'revenueRange');
-      else if(stepId === 'decisionMaker') renderChoice(body, stepId,
-        "Who is responsible for making strategic decisions for your agency's growth?",
-        [
-          ["It's just me (I am the sole decision-maker)", "It's just me (I am the sole decision-maker)"],
-          ["I have a business partner / co-founder (we make decisions together)", "I have a business partner / co-founder (we make decisions together)"],
-          ["We have a leadership / board team", "We have a leadership / board team"]
-        ], 'decisionMaker');
-      else if(stepId === 'revenueGoal') renderChoice(body, stepId,
-        'What is your target monthly revenue goal for the next 12 months?',
-        [
-          ['$30,000 to $50,000/month (Setting the floor)', '$30,000 to $50,000/month (Setting the floor)'],
-          ['$50,000 to $100,000/month (Mid-tier scaling)', '$50,000 to $100,000/month (Mid-tier scaling)'],
-          ['$100,000+/month (Enterprise / High-growth)', '$100,000+/month (Enterprise / High-growth)'],
-          ['We are already doing $100k+/mo and want to optimize/automate our systems', 'We are already doing $100k+/mo and want to optimize/automate our systems']
-        ], 'revenueGoal');
-      else if(stepId === 'budget') renderChoice(body, stepId,
-        'Growth requires investment. We charge an upfront build fee + a performance fee on results. What is your current budget to scale your sales systems?',
-        [
-          ['Aggressive Scale ($5k+): I value speed. Build the system for me so I can close deals.', 'Aggressive Scale ($5k+): I value speed. Build the system for me so I can close deals.'],
-          ['Steady Growth ($3k-$5k): I want to scale but need to move step-by-step.', 'Steady Growth ($3k-$5k): I want to scale but need to move step-by-step.'],
-          ['Slow Pace (Under $3k): I have more time than money right now.', 'Slow Pace (Under $3k): I have more time than money right now.'],
-          ['No Budget ($0): I am looking for a partner to build this for free / commission-only.', 'No Budget ($0): I am looking for a partner to build this for free / commission-only.']
-        ], 'budget');
       else if(stepId === 'contact') renderContact(body);
+      else if(stepId === 'instagram') renderTextStep(body, stepId,
+        "What's your Instagram handle?",
+        {
+          field:'instagramHandle', label:'Instagram Handle', type:'text', placeholder:'@youragency',
+          errorMsg:'Please enter your Instagram handle.',
+          validate:function(v){ return !!(v && v.trim().length > 1); }
+        });
+      else if(stepId === 'website') renderTextStep(body, stepId,
+        "What's your agency's website?",
+        {
+          field:'website', label:'Website', type:'text', placeholder:'www.youragency.com',
+          errorMsg:'Please enter a valid website URL.',
+          validate:function(v){ v = (v || '').trim(); return v.length > 3 && v.indexOf('.') !== -1; }
+        });
+      else if(stepId === 'priorAgency') renderChoice(body, stepId,
+        'Have you worked with a marketing or lead-generation agency before?',
+        [['Yes','Yes'], ['No','No']], 'priorAgency');
+      else if(stepId === 'biggestChallenge') renderTextareaStep(body, stepId,
+        "What's the single biggest challenge holding your agency back right now?",
+        {
+          field:'biggestChallenge', label:'Biggest Challenge', placeholder:'e.g. not enough qualified leads, slow follow-up, low close rate…',
+          errorMsg:'Please share your biggest challenge — even a sentence helps.',
+          validate:function(v){ return !!(v && v.trim().length > 3); },
+          nextLabel:'Submit Application',
+          onComplete:submitApplication
+        });
       else if(stepId === 'softDownsell') renderSoftDownsell(body);
       else if(stepId === 'thankyou') renderThankYou(body);
 
@@ -1705,7 +1662,7 @@
       wrap.innerHTML =
         '<span class="apply-step-tag">Application</span>' +
         '<div class="apply-question">Welcome! Thank you for reaching out to SCLD.</div>' +
-        '<p>At SCLD Consulting, we build and run done-for-you sales systems for early-stage real estate and construction. From first interaction to finally booked serious buyers — we handle it all, so your revenue grows without adding to your workload.</p>' +
+        '<p>At SCLD Consulting, we build and run done-for-you sales systems for early-stage real estate agencies. From first interaction to final close — we handle it all, so your revenue grows without adding to your workload.</p>' +
         '<div class="apply-actions" style="justify-content:flex-end;"><button class="btn btn-primary" id="apply-next">Next</button></div>';
       body.appendChild(wrap);
       body.querySelector('#apply-next').addEventListener('click', function(){
@@ -1864,9 +1821,8 @@
         answers.mobileCountry = countrySelect.value;
         answers.mobileDialCode = selectedCountry ? selectedCountry.dial : '';
         answers.mobileNumber = mobileInput.value.trim();
-        submitApplication();
         goTo(nextStepFrom(stepId));
-      }, 'Submit Application');
+      }, 'Continue');
       frag.appendChild(actions);
       body.appendChild(frag);
 
@@ -1881,6 +1837,78 @@
         });
       });
       firstInput.focus();
+    }
+
+    // ---- generic single-field text step (used by: instagram, website) ----
+    function renderTextStep(body, stepId, question, cfg){
+      var frag = document.createElement('div');
+      frag.innerHTML = stepTag(stepId) + '<div class="apply-question">' + question + '</div>';
+
+      var wrap = document.createElement('div');
+      wrap.className = 'apply-field';
+      wrap.appendChild(el('<label class="apply-field-label">' + cfg.label + '</label>'));
+      var input = document.createElement('input');
+      input.className = 'apply-input';
+      input.type = cfg.type || 'text';
+      input.placeholder = cfg.placeholder || '';
+      input.value = answers[cfg.field] || '';
+      wrap.appendChild(input);
+      var error = el('<div class="apply-error">' + cfg.errorMsg + '</div>');
+      wrap.appendChild(error);
+      frag.appendChild(wrap);
+
+      function valid(){ return cfg.validate(input.value); }
+
+      var actions = buildActions(stepId, valid(), function(){
+        if(!valid()){ error.classList.add('show'); return; }
+        answers[cfg.field] = input.value.trim();
+        goTo(nextStepFrom(stepId));
+      }, cfg.nextLabel || 'Continue');
+      frag.appendChild(actions);
+      body.appendChild(frag);
+
+      input.addEventListener('input', function(){
+        error.classList.remove('show');
+        var btn = frag.querySelector('#apply-next');
+        if(btn) btn.disabled = !valid();
+      });
+      input.focus();
+    }
+
+    // ---- generic textarea step (used by: biggestChallenge) ----
+    function renderTextareaStep(body, stepId, question, cfg){
+      var frag = document.createElement('div');
+      frag.innerHTML = stepTag(stepId) + '<div class="apply-question">' + question + '</div>';
+
+      var wrap = document.createElement('div');
+      wrap.className = 'apply-field';
+      wrap.appendChild(el('<label class="apply-field-label">' + cfg.label + '</label>'));
+      var textarea = document.createElement('textarea');
+      textarea.className = 'apply-textarea';
+      textarea.placeholder = cfg.placeholder || '';
+      textarea.value = answers[cfg.field] || '';
+      wrap.appendChild(textarea);
+      var error = el('<div class="apply-error">' + cfg.errorMsg + '</div>');
+      wrap.appendChild(error);
+      frag.appendChild(wrap);
+
+      function valid(){ return cfg.validate(textarea.value); }
+
+      var actions = buildActions(stepId, valid(), function(){
+        if(!valid()){ error.classList.add('show'); return; }
+        answers[cfg.field] = textarea.value.trim();
+        if(cfg.onComplete) cfg.onComplete();
+        goTo(nextStepFrom(stepId));
+      }, cfg.nextLabel || 'Continue');
+      frag.appendChild(actions);
+      body.appendChild(frag);
+
+      textarea.addEventListener('input', function(){
+        error.classList.remove('show');
+        var btn = frag.querySelector('#apply-next');
+        if(btn) btn.disabled = !valid();
+      });
+      textarea.focus();
     }
 
     function renderSoftDownsell(body){
